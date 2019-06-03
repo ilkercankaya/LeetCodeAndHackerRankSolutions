@@ -6,7 +6,7 @@ My solutions for the problems in Hacker Rank are shared. The solutions are provi
 
 ## The Folders
 
-`Algorithms:` Folders for solutions of _**ALGORITHM**_ problems.
+`Algorithms:` Folders for solutions of _**ALGORITHMS**_ problems.
 
 `Data Structures:` Folders for solutions of _**DATA STRUCTURES**_ problems.
 
