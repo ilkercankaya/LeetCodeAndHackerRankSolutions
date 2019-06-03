@@ -7,6 +7,9 @@ import re
 import sys
 import copy
 
+
+
+# The Bomberman Game
 # Patterns repeat after n = 4
 # n = - ,1 ,2, 4
 # n = 5 ,6 ,7, 8 are the same

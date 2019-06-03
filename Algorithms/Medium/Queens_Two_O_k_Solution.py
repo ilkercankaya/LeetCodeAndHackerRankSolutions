@@ -8,7 +8,7 @@ import random
 import re
 import sys
 
-
+# Queen's Attack II
 # Complete the queensAttack function below.
 def queensAttack(n, k, r_q, c_q, obstacles):
     min_col = 1
