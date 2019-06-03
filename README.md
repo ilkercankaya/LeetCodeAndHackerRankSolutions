@@ -1,5 +1,6 @@
 # Hacker Rank Solutions
-My solutions for the problems in Hacker Rank are shared. The solutions are provided by me.
+My solutions for the problems in Hacker Rank are shared. The solutions are provided by me. All of the solutions here are 
+passing all the test cases in the Hack Rank evaluation.
 
 [My Hacker Rank Account](https://www.hackerrank.com/ilkercankaya)
 
