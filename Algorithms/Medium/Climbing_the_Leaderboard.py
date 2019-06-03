@@ -10,7 +10,7 @@ import sys
 # Complete the climbingLeaderboard function below.
 
 # modified binary search tree by ilkercan kaya
-# pre-condition: descending sorteda arr, post-condition: returns index if element were supposed to be sortly-added
+# pre-condition: descending sorted array, post-condition: returns index if element were supposed to be sorted added
 def binarySearchIndexFinder(arr, l, r, x):
     mid = -1
     while l <= r:
