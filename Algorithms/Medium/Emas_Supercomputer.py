@@ -107,8 +107,6 @@ def twoPluses(grid):
                     # if multiplicate is greater set new are
                     multiple = mapped[i][0] * mapped[j][0]
                     max_area = multiple if multiple > max_area else max_area
-                if max_area ==25:
-                    print(1)
 
     return max_area
 
