@@ -39,7 +39,7 @@
  
  2. **Space / Time Tradeoffs (Hash Tables)**
  
- 3. **D.I.Y**
+ 3. **D.I.Y:** Solve the algorithm my your brain and copy that algorithm to your code.
 ## Solve Algorithms in 7 Steps
 
 1. LISTEN THE QUESTION
