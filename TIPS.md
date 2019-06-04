@@ -20,7 +20,7 @@
 
 * Current job -> Beginning of the career -> Go Towards Chronologically
 
-* Quich shows of success
+* Quick shows of success
 
 * Drive the interviewer with giving details of the projects that you took an interesting part
 
