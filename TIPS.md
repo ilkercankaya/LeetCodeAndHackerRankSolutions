@@ -16,6 +16,8 @@
 
 * Finding All Permutations -> O(N!)
 
+* HashSets -> No Duplicates + Internally contains HashMap + Stores set such as {1, 4, 7, 23, 14}, Key and Values are the same
+
 ## Behavioural Part
 
 * Resume Walk-Through
@@ -42,7 +44,7 @@
  3. **D.I.Y:** Solve the algorithm my your brain and copy that algorithm to your code.
 ## Solve Algorithms in 7 Steps
 
-1. LISTEN THE QUESTION
+1. LISTEN THE QUESTION - ASK FOR CLARIFICATION IF NEEDED
 
 2. HAVE AN EXAMPLE - NOT A SMALL CASE
 
@@ -54,5 +56,5 @@
 
 6. CODE THE CODE
 
-7. TEST THE CODE OF ALGORITHM BY RUNNING THE CODE STEP-By-STEP ON THE BOARD WITH A DIFFERENT SMALLER TEST CASE THAN 2.
+7. TEST THE CODE OF ALGORITHM BY RUNNING THE CODE STEP-By-STEP ON THE BOARD WITH A DIFFERENT SMALLER TEST CASE THAN 2. + AN EDGE CASE
 
