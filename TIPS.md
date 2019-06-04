@@ -1,4 +1,4 @@
-# Technical Part 
+## Technical Part 
 
 * Always Have Hashtable at the top of your mind
 
@@ -14,7 +14,7 @@
 
 * Finding All Permutations -> O(N!)
 
-# Behavioural Part
+## Behavioural Part
 
 * Resume Walk-Through
 
@@ -28,10 +28,10 @@
 
 * Mention Hobbies -> HackerRank + Hackathons + Online Courses
 
-# 3 Ways To Approach An Algorithm 
+## 3 Ways To Approach An Algorithm 
 
 
-# Solve Algorithms in 7 Steps
+## Solve Algorithms in 7 Steps
 
 1. LISTEN THE QUESTION
 
