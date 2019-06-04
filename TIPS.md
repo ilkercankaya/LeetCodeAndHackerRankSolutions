@@ -30,7 +30,14 @@
 
 ## 3 Ways To Approach An Algorithm 
 
-
+ 1. **BUD**
+    1. **Bottlenecks**: Find what causes the algorithm to be slow and fix its time complexity.
+    2. **Unnecessary Work**: A unnecessary work after a condition is met could be avoided e.g. with break or pass statements.
+    3. **Duplicate Work**: A repeated work could be avoided by look up tables.
+ 
+ 2. Space / Time Tradeoffs (Hash Tables)
+ 
+ 3.
 ## Solve Algorithms in 7 Steps
 
 1. LISTEN THE QUESTION
