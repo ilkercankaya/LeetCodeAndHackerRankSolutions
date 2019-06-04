@@ -1,4 +1,4 @@
-**Technical Part**
+# Technical Part 
 
 * Always Have Hashtable at the top of your mind
 
@@ -14,7 +14,7 @@
 
 * Finding All Permutations -> O(N!)
 
-**Behavioural Part**
+# Behavioural Part
 
 * Resume Walk-Through
 
@@ -28,22 +28,22 @@
 
 * Mention Hobbies -> HackerRank + Hackathons + Online Courses
 
-**3 Ways To Approach An Algorithm**
+# 3 Ways To Approach An Algorithm 
 
 
-**Solve Algorithms in 7 Steps**
+# Solve Algorithms in 7 Steps
 
-* LISTEN THE QUESTION
+1. LISTEN THE QUESTION
 
-* HAVE AN EXAMPLE - NOT A SMALL CASE
+2. HAVE AN EXAMPLE - NOT A SMALL CASE
 
-* THINK OF A BRUTE FORCE WORST CASE
+3. THINK OF A BRUTE FORCE WORST CASE
 
-* OPTIMIZE THE ALGORITHM ON THE HAND
+4. OPTIMIZE THE ALGORITHM ON THE HAND
 
-* WALK THROUGH THE ALGORITHM - DATA STRUCTURES && STRUCTURE OF THE CODE && CONSISTENT + DESCRIPTIVE NAMING
+5. WALK THROUGH THE ALGORITHM - DATA STRUCTURES && STRUCTURE OF THE CODE && CONSISTENT + DESCRIPTIVE NAMING
 
-* CODE THE CODE
+6. CODE THE CODE
 
-* TEST THE CODE OF ALGORITHM BY RUNNING THE CODE STEP-By-STEP ON THE BOARD
+7. TEST THE CODE OF ALGORITHM BY RUNNING THE CODE STEP-By-STEP ON THE BOARD
 
