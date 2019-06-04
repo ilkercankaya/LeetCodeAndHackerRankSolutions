@@ -2,6 +2,8 @@
 
 * Always Have Hashtable at the top of your mind
 
+* Write functions to keep everything clean and easily changeable
+
 * Sorted Array -> Possibly Indicates Binary Search
 
 * Duplicate Elements -> HashTable
@@ -35,9 +37,9 @@
     2. **Unnecessary Work**: A unnecessary work after a condition is met could be avoided e.g. with break or pass statements.
     3. **Duplicate Work**: A repeated work could be avoided by look up tables.
  
- 2. Space / Time Tradeoffs (Hash Tables)
+ 2. **Space / Time Tradeoffs (Hash Tables)**
  
- 3.
+ 3. **D.I.Y**
 ## Solve Algorithms in 7 Steps
 
 1. LISTEN THE QUESTION
@@ -52,5 +54,5 @@
 
 6. CODE THE CODE
 
-7. TEST THE CODE OF ALGORITHM BY RUNNING THE CODE STEP-By-STEP ON THE BOARD
+7. TEST THE CODE OF ALGORITHM BY RUNNING THE CODE STEP-By-STEP ON THE BOARD WITH A DIFFERENT SMALLER TEST CASE THAN 2.
 
