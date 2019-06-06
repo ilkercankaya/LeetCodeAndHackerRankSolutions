@@ -18,6 +18,25 @@
 
 * HashSets -> No Duplicates + Internally contains HashMap + Stores set such as {1, 4, 7, 23, 14}, Key and Values are the same
 
+* Tress -> Root = First, Leaf = Last
+
+* Binary Search Tress -> Left = Smaller, Right = Bigger 
+
+* BST + Sorted -> Insert = O(log N), find O(log N)
+
+* Balanced Tree Assumption On Interviews
+
+* Inorder, Preorder, Postorder: Code Always Have Recursion(Left), Recursion(Right) stabled, only the print statement changes
+    1. Inorder: Left First Then Root Then Right
+    1. Preorder: Root First Then Left then Right 
+    1. Postorder: Left Then Right Then Root
+  
+* Depth-first search = Depth increases gradually
+
+* Breadth-first search = Breadth increases gradually - Check the code for the Binary Search Tree
+
+* 
+
 ## Behavioural Part
 
 * Resume Walk-Through
