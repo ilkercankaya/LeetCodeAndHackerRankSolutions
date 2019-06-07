@@ -2,7 +2,7 @@ import queue as Queue
 
 cntr = 0
 
-
+# Tree: Huffman Decoding
 class Node:
     def __init__(self, freq, data):
         self.freq = freq
