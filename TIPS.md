@@ -37,6 +37,7 @@
 
 * Binary-tree -> Recursion or Queues
 
+* Bubble Sort -> until array is sorted - walk through and swap elements leading to number of times swapped - 1 4 5 7 2 3 -> 1 4 5 2 3 7 -> 1 4 2 3 5 7 -> 1 2 3 4 5 7
 
 
 ## Behavioural Part
