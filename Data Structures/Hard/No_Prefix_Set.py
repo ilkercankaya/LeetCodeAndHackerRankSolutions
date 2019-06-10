@@ -1,4 +1,4 @@
-#!/bin/python3
+    #!/bin/python3
 
 import os
 import sys
@@ -44,7 +44,6 @@ class Trie:
     def subTreeWordGetter(self, node, words, preword):
         if node.isEndOfWord:
             words.append(preword)
-
         for i in range(len(node.children)):
             if node.children[i]:
                 preword += self._indexToChar(i)
@@ -82,46 +81,33 @@ class Trie:
             if not pCrawl.children[index]:
                 pCrawl.children[index] = self.getNode()
             pCrawl = pCrawl.children[index]
+
+            if pCrawl.isEndOfWord:
+                print("BAD SET")
+                print(key)
+                return False
             pCrawl.total += 1
+
+        if sum(x is not None for x in pCrawl.children) > 0:
+            print("BAD SET")
+            print(key)
+            return False
 
             # mark last node as leaf
         pCrawl.isEndOfWord = True
 
-    def search(self, key):
-
-        # Search key in the trie
-        # Returns true if key presents
-        # in trie, else false
-        pCrawl = self.root
-        length = len(key)
-        for level in range(length):
-            index = self._charToIndex(key[level])
-            if not pCrawl.children[index]:
-                return 0
-            pCrawl = pCrawl.children[index]
-
-        return pCrawl.total
-
-    #
+        return True
 
 
 # Complete the contacts function below.
 #
-def contacts(queries):
+def prefixMatcher(queries):
     trie = Trie()
-    results = []
     for i in range(len(queries)):
-        queryList = queries[i]
+        if not trie.insert(queries[i][0]):
+            return
 
-        if queryList[0] == "add":
-            trie.insert(queryList[1])
-        elif queryList[0] == "find":
-            results.append(trie.search(queryList[1]))
-        elif queryList[0] == "pre":
-            results.append(trie.getAllWords(queryList[1]))
-
-    return results
-
+    print("GOOD SET")
 
 if __name__ == '__main__':
 
@@ -132,19 +118,6 @@ if __name__ == '__main__':
     for _ in range(queries_rows):
         queries.append(input().rstrip().split())
 
-    result = contacts(queries)
-
-    print(result)
+    prefixMatcher(queries)
 
 
-""""
-8
-add hack
-add ilkercan
-add ilke
-add ilker
-add hackerrank
-find hac
-find hak
-pre ilk
-"""

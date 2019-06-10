@@ -32,10 +32,12 @@
 
 * Trie -> reTrieval [Video Explanation Here](https://www.youtube.com/watch?v=-urNrIAQnNo)
     1. A tree that stores strings. Used for string search such as prefix, suffix. [E.g](https://www.hackerrank.com/challenges/contacts/problem)
-    2. A  well balanced BST will need time proportional to M * log N, where M is maximum string length and N is number of keys in tree. The crucial point here is that unlike a BST with numbers your comparison complexity at any node is not O(1) but instead O(m) (Since in the worst case your string at any node differs from your pattern at the last letter).
+    2. Can be used for word validation such as when the user is typing a word we can look up trie to see if the word is valid and maybe even suggest to complete the words.
+    
+    3. A  well balanced BST will need time proportional to M * log N, where M is maximum string length and N is number of keys in tree. The crucial point here is that unlike a BST with numbers your comparison complexity at any node is not O(1) but instead O(m) (Since in the worst case your string at any node differs from your pattern at the last letter).
 In the worst case you'll have to compare your pattern with O(log n) nodes.
-    3. Using Trie, we can search the key in O(M) time. 
-    4. Contains a HashMap (pointer of alphabet size - use hash to map chars to indexes
+    4. Using Trie, we can search the key in O(M) time. 
+    5. Contains a HashMap (pointer of alphabet size - use hash to map chars to indexes
     ) and a boolean in each node. Boolean for checking if the node is a word since it could also be a prefix.
 
 * Inorder, Preorder, Postorder: Code Always Have Recursion(Left), Recursion(Right) stabled, only the print statement changes
