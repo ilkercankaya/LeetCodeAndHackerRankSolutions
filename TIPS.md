@@ -51,8 +51,6 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
 
 * Binary-tree -> Recursion or Queues
 
-* Bubble Sort -> until array is sorted - walk through and swap elements leading to number of times swapped - 1 4 5 7 2 3 -> 1 4 5 2 3 7 -> 1 4 2 3 5 7 -> 1 2 3 4 5 7
-
 * Recursion time complexity: [Example Here.](https://www.youtube.com/watch?v=gCsfk2ei2R8)
     1. **Substitution Method:** We make a guess for the solution and then we use mathematical induction to prove the the guess is correct or incorrect.
 
@@ -67,11 +65,20 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
     1. O(N^2) worst case, O(N) best; [E.g:](https://www.youtube.com/watch?v=JU767SDMDvA)
     2. Keep a sorted, unsorted list.
    
-* **Selection sort**:
+* **Selection sort**: 
     1. O(N^2) worst case, O(N^2) best; [E.g:](https://www.youtube.com/watch?v=g-PGLbMth_g)
     2. Find minimum from unsorted partition by iterating with minimum-finder algo with O(N), move it to sorted partition.
     3. Worst sorting algorithm.
-  
+
+* **Bubble Sort** -> until array is sorted - walk through and swap elements leading to number of times swapped - 1 4 5 7 2 3 -> 1 4 5 2 3 7 -> 1 4 2 3 5 7 -> 1 2 3 4 5 7
+
+* **Heap Sort:** [E.g.](https://www.youtube.com/watch?v=2DmK_H7IdTo&t=76s)
+    1. Create max heap with given array O(N logN)
+    2. Remove the largest element
+    3. Place it in the sorted position
+    4. Space Complexity O(1) since the root is swapped with the last element before the heapify call. [E.g.](https://stackoverflow.com/questions/22233532/why-does-heap-sort-have-a-space-complexity-of-o1)
+    5. Ascending sort -> Form a Max-Heap, Descending Sort -> Form a min-heap.
+    
 * **Priority Queue**: A priority queue is an abstract data type which is like a regular queue or stack data structure, but where additionally each element has a "priority" associated with it. In a priority queue, an element with high priority is served before an element with low priority.
 
 * **Heap**: A Heap is a special Tree-based data structure in which the tree is a complete binary tree. An array is used to store the nodes with level order. Generally, Heaps can be of two types:
@@ -84,12 +91,15 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
     7. **Heapify up - bubble up**: When we switch the current node with the root since the root was smaller than the other node, the swapped node it guaranteed to be smaller than the other child node.
     8. **Heapify down - bubble down**: We switch the current node with the smallest of the children since the smallest node must be the root.
     9. **Advantages**: Useful for accessing the smallest node in O(1) time, schedulers (where the earliest item is desired), find the kth smallest value O(k * logN) {logN due to heapify after deleting root}, median finder.
-
+    10. O(N logN) to build the heap since we make insert calls with each element that could lead to heapify up.
+    11. Find the largest kth number is find the smallest n-k th number in min heap.
 * Priority Queue vs Heap: A heap is an implementation of priority queue with BST's. A normal Priority Queue can have O(N) add time where as a heap has O(logN) add.
 
 * A full binary tree (sometimes proper binary tree or 2-tree) is a tree in which every node other than the leaves has two children. In a full binary tree all nodes have either 0 or 2 children. Both types of nodes can appear at all levels in the tree
 
-* A complete binary tree is a binary tree that at the lowest level the nodes have (by definition) zero children, and at the level above that nodes can have 0, 1 or 2 children. ALSO, the last level must be filled from left to right without leaving any gaps
+* A complete binary tree is a binary tree is a tree that follows the heap structures, add and remove from furthest breadth-first search see if the tree can be formed OR ANOTHER DEF: At the level above the leaves nodes can have 0, 1 or 2 children. ALSO, the last level must be filled from left to right without leaving any gaps. Other than these levels all nodes must have 2 children.
+
+* A perfect binary tree is a binary tree where each nodes except the leaves have 2 children.
 ## Behavioural Part
 
 * Resume Walk-Through
