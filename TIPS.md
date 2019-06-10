@@ -71,8 +71,25 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
     1. O(N^2) worst case, O(N^2) best; [E.g:](https://www.youtube.com/watch?v=g-PGLbMth_g)
     2. Find minimum from unsorted partition by iterating with minimum-finder algo with O(N), move it to sorted partition.
     3. Worst sorting algorithm.
-    
+  
+* **Priority Queue**: A priority queue is an abstract data type which is like a regular queue or stack data structure, but where additionally each element has a "priority" associated with it. In a priority queue, an element with high priority is served before an element with low priority.
 
+* **Heap**: A Heap is a special Tree-based data structure in which the tree is a complete binary tree. An array is used to store the nodes with level order. Generally, Heaps can be of two types:
+    1. **Min-Heap**: In a Min-Heap the key present at the root node must be minimum among the keys present at all of it’s children. The same property must be recursively true for all sub-trees in that Binary Tree.
+    2. **Max-Heap**: In a Max-Heap the key present at the root node must be greatest among the keys present at all of it’s children. The same property must be recursively true for all sub-trees in that Binary Tree.
+    3. Insertion as breadth-depth therefore it always has a height of LogN. Uses bubble'ing to interchange an newly added element to top.
+    4. **Insertion - Bubbling E.g. Min Heap**: Check the parent, if it is greater than our node swap them.
+    5. **Removing**: If root is removed then we have an empty spot. Swap that empty with the last added element. Bubble down the new root. Compare the root with its both children and swap it with the smallest child.
+    6. **Indexing**: Parent = index is current index; parent = (index - 1) / 2, left = index * 2 + 1, right = index * 2 + 2
+    7. **Heapify up - bubble up**: When we switch the current node with the root since the root was smaller than the other node, the swapped node it guaranteed to be smaller than the other child node.
+    8. **Heapify down - bubble down**: We switch the current node with the smallest of the children since the smallest node must be the root.
+    9. **Advantages**: Useful for accessing the smallest node in O(1) time, schedulers (where the earliest item is desired), find the kth smallest value O(k * logN) {logN due to heapify after deleting root}, median finder.
+
+* Priority Queue vs Heap: A heap is an implementation of priority queue with BST's. A normal Priority Queue can have O(N) add time where as a heap has O(logN) add.
+
+* A full binary tree (sometimes proper binary tree or 2-tree) is a tree in which every node other than the leaves has two children. In a full binary tree all nodes have either 0 or 2 children. Both types of nodes can appear at all levels in the tree
+
+* A complete binary tree is a binary tree that at the lowest level the nodes have (by definition) zero children, and at the level above that nodes can have 0, 1 or 2 children. ALSO, the last level must be filled from left to right without leaving any gaps
 ## Behavioural Part
 
 * Resume Walk-Through

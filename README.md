@@ -5,7 +5,7 @@ passing all the test cases in the Hack Rank evaluation.
 [My Hacker Rank Account](https://www.hackerrank.com/ilkercankaya)
 
 
-## The Folders
+## The Folders and The Files
 
 `Algorithms:` Folders for solutions of _**ALGORITHMS**_ problems.
 
@@ -19,4 +19,4 @@ Data Structures, Mathematics_ Problems in HackerRank.
 `Hard:` Contains solutions to _**HARD**_ problems, these includes - _Algorithms, 
 Data Structures, Mathematics_ Problems in HackerRank.
 
-
+`Easy But Not Easy:` Contains solutions to problems which i do not truly believe are 'Easy'.
