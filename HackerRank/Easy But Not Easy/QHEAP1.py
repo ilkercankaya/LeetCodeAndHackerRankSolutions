@@ -1,6 +1,25 @@
 # QHEAP1
 # Not easy because removing an element requires some tricks and thinking. Can not be found easily on the internet  as well.
 
+
+# Heap Sort by ilkercan Kaya: 11/06/2019
+def heapSortDescending(array):
+    # only uses its methods
+    heap = MinBinaryHeap()
+    heap.heap = array
+
+    # build a heap from the given array
+    for i in range(len(array) // 2 - 1):
+        heap.heapifyDown(i)
+
+    # keep a sorted partition and a non sorted - keep on swapping the root with the last element
+    for i in range(len(array) - 1, 0, -1):
+        heap.heap[i], heap.heap[0] = heap.heap[0], heap.heap[i]  # swap
+        heap.heapifyDownWithSize(0, i)
+
+    return heap.heap
+
+
 # Class by ilkercan Kaya: 10/06/2019
 class MinBinaryHeap:
     def __init__(self):
@@ -15,11 +34,11 @@ class MinBinaryHeap:
     def getRightChildIndex(self, i):
         return i * 2 + 2
 
-    def hasRightChildIndex(self, i):
-        return self.getRightChildIndex(i) < len(self.heap)
+    def hasRightChildIndex(self, i, size):
+        return self.getRightChildIndex(i) < size
 
-    def hasLeftChildIndex(self, i):
-        return self.getLeftChildIndex(i) < len(self.heap)
+    def hasLeftChildIndex(self, i, size):
+        return self.getLeftChildIndex(i) < size
 
     def heapifyUp(self, pos):
         index = pos
@@ -34,12 +53,31 @@ class MinBinaryHeap:
                 self.heap[parentIndex], self.heap[index] = self.heap[index], self.heap[parentIndex]
             index = parentIndex
 
-    def heapifyDown(self, pos):
+    def heapifyDownWithSize(self, pos, size):
         index = pos
-        while self.hasLeftChildIndex(index):
+        count = 0
+        while self.hasLeftChildIndex(index, size):
             minChildIndex = self.getLeftChildIndex(index)
 
-            if self.hasRightChildIndex(index) and self.heap[self.getRightChildIndex(index)] < self.heap[
+            if self.hasRightChildIndex(index, size) and self.heap[self.getRightChildIndex(index)] < self.heap[
+                self.getLeftChildIndex(index)]:
+                minChildIndex = self.getRightChildIndex(index)
+
+            if self.heap[index] < self.heap[minChildIndex]:
+                break
+            else:
+                self.heap[minChildIndex], self.heap[index] = self.heap[index], self.heap[minChildIndex]
+
+            count += 1
+
+            index = minChildIndex
+
+    def heapifyDown(self, pos):
+        index = pos
+        while self.hasLeftChildIndex(index, len(self.heap)):
+            minChildIndex = self.getLeftChildIndex(index)
+
+            if self.hasRightChildIndex(index, len(self.heap)) and self.heap[self.getRightChildIndex(index)] < self.heap[
                 self.getLeftChildIndex(index)]:
                 minChildIndex = self.getRightChildIndex(index)
 
@@ -75,15 +113,12 @@ class MinBinaryHeap:
             lastElement = self.heap.pop()
             self.heap[indexOfKey] = lastElement
 
-            # heapify with respect to both heapify up and heapify down
-            # important thing to note - after the swap only one of these methods are run fully
-
+            # heapify with respect to heapify down
             """
-            proof: after the swap if the node is greater than its parent it cannot be smaller than any of the child 
-            since childs are smaller than the parent then it is either bubble down or nothing to be done
+            proof: ONLY HEAPIFYDOWN is required. Proof: If a node at a level is swapped with the last node 
+            since the last node is greater than the current node,
+            it is guranteed that the new value is always bigger than its parent.
             """
-
-            self.heapifyUp(indexOfKey)
             self.heapifyDown(indexOfKey)
         except ValueError:
             # looking for an key that doesnt exist in the binary heap
@@ -95,6 +130,8 @@ class MinBinaryHeap:
 
 if __name__ == '__main__':
 
+    print(heapSortDescending([1, 6, 3, 5, 9, 4]))
+    print(heapSortDescending([2, 1, 9, 12, 15, 19, 3]))
     queries_rows = int(input())
 
     queries = []

@@ -72,14 +72,15 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
 
 * **Bubble Sort** -> until array is sorted - walk through and swap elements leading to number of times swapped - 1 4 5 7 2 3 -> 1 4 5 2 3 7 -> 1 4 2 3 5 7 -> 1 2 3 4 5 7
 
-* **Heap Sort:** [E.g.](https://www.youtube.com/watch?v=2DmK_H7IdTo&t=76s)
+* **Heap Sort:** [E.g.](https://www.youtube.com/watch?v=2DmK_H7IdTo&t=76s) [E.g. 2](https://www.youtube.com/watch?v=2fA1FdxNqiE)
     1. Create max heap with given array O(N logN)
     2. Remove the largest element
     3. Place it in the sorted position
     4. Space Complexity O(1) since the root is swapped with the last element before the heapify call. [E.g.](https://stackoverflow.com/questions/22233532/why-does-heap-sort-have-a-space-complexity-of-o1)
     5. Ascending sort -> Form a Max-Heap, Descending Sort -> Form a min-heap.
-    
-* **Priority Queue**: A priority queue is an abstract data type which is like a regular queue or stack data structure, but where additionally each element has a "priority" associated with it. In a priority queue, an element with high priority is served before an element with low priority.
+    6. Build Max Heap: Start from non last leafs (len(A) // 2 - 1 for 0 index) and call heapify down, NOT HEAPIFY UP, this is because build max heap traverses from last non leaf node and keeps making the subtrees a heap, if heapify up was called it would mess the subtrees with the elements coming from up. [E.g.](https://www.youtube.com/watch?v=HI97KDV23Ig)
+
+***Priority Queue**: A priority queue is an abstract data type which is like a regular queue or stack data structure, but where additionally each element has a "priority" associated with it. In a priority queue, an element with high priority is served before an element with low priority.
 
 * **Heap**: A Heap is a special Tree-based data structure in which the tree is a complete binary tree. An array is used to store the nodes with level order. Generally, Heaps can be of two types:
     1. **Min-Heap**: In a Min-Heap the key present at the root node must be minimum among the keys present at all of it’s children. The same property must be recursively true for all sub-trees in that Binary Tree.
@@ -87,12 +88,15 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
     3. Insertion as breadth-depth therefore it always has a height of LogN. Uses bubble'ing to interchange an newly added element to top.
     4. **Insertion - Bubbling E.g. Min Heap**: Check the parent, if it is greater than our node swap them.
     5. **Removing**: If root is removed then we have an empty spot. Swap that empty with the last added element. Bubble down the new root. Compare the root with its both children and swap it with the smallest child.
-    6. **Indexing**: Parent = index is current index; parent = (index - 1) / 2, left = index * 2 + 1, right = index * 2 + 2
-    7. **Heapify up - bubble up**: When we switch the current node with the root since the root was smaller than the other node, the swapped node it guaranteed to be smaller than the other child node.
-    8. **Heapify down - bubble down**: We switch the current node with the smallest of the children since the smallest node must be the root.
-    9. **Advantages**: Useful for accessing the smallest node in O(1) time, schedulers (where the earliest item is desired), find the kth smallest value O(k * logN) {logN due to heapify after deleting root}, median finder.
-    10. O(N logN) to build the heap since we make insert calls with each element that could lead to heapify up.
-    11. Find the largest kth number is find the smallest n-k th number in min heap.
+    6. **Removing wrt. Key**: Find the node with O(N) search and delete the node and swap the last node with the deleted current. After that ONLY HEAPIFYDOWN from that node is required. Proof: If a node at a level is swapped with the last node since the last node is greater than the current node, it is guranteed that the new value is always bigger than its parent. However, it is not guaranteed that the value is the smallest wrt. all children.
+    7. **Indexing**: Parent = index is current index; parent = (index - 1) / 2, left = index * 2 + 1, right = index * 2 + 2
+    8. **Heapify up - bubble up**: When we switch the current node with the root since the root was smaller than the other node, the swapped node it guaranteed to be smaller than the other child node.
+    9. **Heapify down - bubble down**: We switch the current node with the smallest of the children since the smallest node must be the root.
+    10. **Advantages**: Useful for accessing the smallest node in O(1) time, schedulers (where the earliest item is desired), find the kth smallest value O(k * logN) {logN due to heapify after deleting root}, median finder.
+    11. O(N logN) to build the heap since we make insert calls with each element that could lead to heapify up.
+    12. But if the array is given initially it is O(N) due to the heapify call for the each subtrees starting from non leaves.
+    13. Find the largest kth number is find the smallest n-k th number in min heap.
+    
 * Priority Queue vs Heap: A heap is an implementation of priority queue with BST's. A normal Priority Queue can have O(N) add time where as a heap has O(logN) add.
 
 * A full binary tree (sometimes proper binary tree or 2-tree) is a tree in which every node other than the leaves has two children. In a full binary tree all nodes have either 0 or 2 children. Both types of nodes can appear at all levels in the tree
@@ -100,6 +104,12 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
 * A complete binary tree is a binary tree is a tree that follows the heap structures, add and remove from furthest breadth-first search see if the tree can be formed OR ANOTHER DEF: At the level above the leaves nodes can have 0, 1 or 2 children. ALSO, the last level must be filled from left to right without leaving any gaps. Other than these levels all nodes must have 2 children.
 
 * A perfect binary tree is a binary tree where each nodes except the leaves have 2 children.
+
+* **Depth** Of Root = 0 (Same as level), **Height** of Leaf = 0, The depth of a node is the number of edges from the node to the tree's root node.
+A root node will have a depth of 0. The height of a node is the number of edges on the longest path from the node to a leaf.
+A leaf node will have a height of 0.
+
+* Maximum number of nodes in a height of h with n nodes: ceil(n / (2^(h + 1)))
 ## Behavioural Part
 
 * Resume Walk-Through
