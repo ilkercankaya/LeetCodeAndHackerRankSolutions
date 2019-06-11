@@ -14,8 +14,8 @@ class Solution(object):
         # Just like in the heap left child and right child count should meet wrt to level order travel
         queue = []
 
-        count = 1
-        queue.append([count, root])
+        count = 0
+        queue.append([1, root])
 
         while len(queue) != 0:
             count += 1
