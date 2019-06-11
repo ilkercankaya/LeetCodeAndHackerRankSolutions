@@ -15,11 +15,9 @@ class Solution(object):
         queue = []
 
         count = 0
-        queue.append([1, root])
+        queue.append([count, root])
 
         while len(queue) != 0:
-            count += 1
-
             popped = queue.pop(0)
             index = popped[0]
             node = popped[1]
@@ -28,9 +26,11 @@ class Solution(object):
                 return False
 
             if node.left:
-                queue.append([2 * index , node.left])
+                queue.append([2 * index + 1 , node.left])
             if node.right:
-                queue.append([2 * index + 1, node.right])
+                queue.append([2 * index + 2, node.right])
+            
+            count += 1
 
         return True
 
