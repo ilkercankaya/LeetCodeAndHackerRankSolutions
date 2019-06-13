@@ -80,6 +80,61 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
     5. Ascending sort -> Form a Max-Heap, Descending Sort -> Form a min-heap.
     6. Build Max Heap: Start from non last leafs (len(A) // 2 - 1 for 0 index) and call heapify down, NOT HEAPIFY UP, this is because build max heap traverses from last non leaf node and keeps making the subtrees a heap, if heapify up was called it would mess the subtrees with the elements coming from up. [E.g.](https://www.youtube.com/watch?v=HI97KDV23Ig)
 
+* **Quicksort (Also known as Partition Sort):**
+    1. Pivot: All the elements smallers than pivot should be on left and all the elements greater than pivot should be on right.
+    2. The process of making the list in 1. is called partitioning
+    3. Partitioning only ensures that the pilot is placed in the correct position of the array. The left and right sub-arrays are arranged randomly.
+    4. After partitioning the problem is broke down into 2 sub problems, sort the array on the left and the right.
+    5. Divide and Conquer.
+    6. Not a stable algorithm.
+    7. Space complexity O(log(N)) due to stack frames. (2 calls from the middle of the array adds up to 2*logN but it is O(logN))
+    8. Naive Approach Space complexity O(N) due to stack frames. Pivot is always chosen as the smallest element leading to N stack calls to partitioning.
+    9. [Space complexity reduce method.](https://www.geeksforgeeks.org/quicksort-tail-call-optimization-reducing-worst-case-space-log-n/amp/) After partitioning, the partition with the fewest elements is (recursively) sorted first, requiring at most O(log n) space. Then the other partition is sorted using tail recursion or iteration, which doesn't add to the call stack. This idea, as discussed above, was described by R. Sedgewick, and keeps the stack depth bounded by O(log n).
+    10. [Check Method II For Complete Explanation Space Complexity.](http://www.cs.nthu.edu.tw/~wkhon/algo08-tutorials/tutorial2b.pdf) if (there is X with length(X) < n/2) call Qsort(X) else partition X into X’and X’’ until all X are processed
+        1. The idea of Method II is tail recursion
+        2. Call recursion only when sub-problem is small enough
+        3. First solves sub-problem with smaller size
+    11. Average and Best Running time of O(N logN) due to logN times (best pivot picking) partitioning (which has O(N) time complexity).
+    12. Worst case of O(N^2) due to picking the smallest as the pivot leads to N calls to partitioning (which has O(N) time complexity).
+    13. This is a tail recursive algorithm.
+    14. Median Of Three: Pick 3 elements chosen as first, middle, last, then sort them in the original array and use the median as the pivot. Eliminates the problem with (almost) sorted input. Compared to picking the pivot randomly:
+        1. It ensures that one common case (fully sorted data) remains optimal.
+        2. It's more difficult to manipulate into giving the worst case.
+        3. A PRNG is often relatively slow.
+    15. Pick a pivot and put that at the last index to run the partitioning algo.
+    16. Pick i = 0, j = last element before pivot and iterate until i meets an element that is greater than the pivot and j meets an element that is smaller than the pivot. Swap these elements and keep on iterating until i and j have crossed. Swap the element at i with the pivot.
+        1. Should i and j stop when they see elements equal to the pivot? Intuitively They should do the same thing, otherwise they will cause an imbalance. 
+        2. For instance if i stops and j does not stop all elements equal to the pivot end up in S2
+        3. If i and j both stop when they see elements equal to the pivot, there will be many swaps between identical elements. Although this seems useless, the positive effect is that i and j will cross in the middle, so the partition creates (nearly)  equal sized partitions.
+        4. Consequently, if i and j do NOT stop, this would create very uneven partitions. (similar to choosing the first element!)
+    
+* **Quick Select:** Use the idea of partitioning recursively to find the kth smallest element. This makes one recursive call instead of two as in Naive Quicksort. Average O(N) time complexity, worst O(N^2). Use a good pivot to avoid worst.
+    1. T(n) = cn + T(n/2)
+    2. c(n + n/2 + n/4 + ... + 2 + 1) = c(2n) = O(n) 
+
+* **Head vs Tail Recursion:**
+    1. **(Non-Tail-Recursive) Head Recursion**: You make a recursive call first then do the calculation once the call is back. This method is prone to stack overflow if we exceed the stack limit.
+    
+           public int factorial(int n) {
+           if (n == 0) {
+              return 1;
+           } else {
+              return n * factorial(n - 1);
+           }
+    2. **Tail Recursion**: A recursive function is tail recursive when recursive call is the last thing executed by the function.
+    3. Tail recursion doesnt add to the call stack. [E.g.](https://stackoverflow.com/questions/33923/what-is-tail-recursion) 
+    Although some languages does not support it such as Java.
+    4. _Tail call elimination:_ The tail recursive functions considered better than non tail recursive functions as tail-recursion can be optimized by compiler. The idea used by compilers to optimize tail-recursive functions is simple, since the recursive call is the last statement, there is nothing left to do in the current function, so saving the current function’s stack frame is of no use 
+    
+* **Call Stack:** A call stack is a stack data structure that stores information about the active subroutines of a computer program. This kind of stack is also known as an execution stack, program stack, control stack, run-time stack, or machine stack, and is often shortened to just "the stack". [E.g.](https://www.youtube.com/watch?v=Q2sFmqvpBe0)
+
+* A _stable_ sorting algorithm is said to be if two objects with equal keys appear in the same order in sorted output as they appear in the input unsorted array. Some sorting algorithms are stable by nature like Insertion sort, Merge Sort, Bubble Sort, Count Sort. And some sorting algorithms are not, like Heap Sort, Quick Sort, etc.
+
+* **In-place vs out-of-place**:
+    1. In-place means that the algorithm is O(1) space. Algorithm that uses O(1) extra space in
+addition to the original input
+    1. Out-of-place means that the algorithm is NOT O(1) space.
+    
 ***Priority Queue**: A priority queue is an abstract data type which is like a regular queue or stack data structure, but where additionally each element has a "priority" associated with it. In a priority queue, an element with high priority is served before an element with low priority.
 
 * **Heap**: A Heap is a special Tree-based data structure in which the tree is a complete binary tree. An array is used to store the nodes with level order. Generally, Heaps can be of two types:
@@ -119,6 +174,9 @@ A leaf node will have a height of 0.
     3. You can use the stack if you know exactly how much data you need to allocate before compile time and it is not too big.	You can use heap if you don't know exactly how much data you will need at runtime or if you need to allocate a lot of data.
     
     4. In a multi-threaded situation each thread will have its own completely independent stack but they will share the heap. Stack is thread specific and Heap is application specific. The stack is important to consider in exception handling and thread executions.
+
+
+
 ## Behavioural Part
 
 * Resume Walk-Through
