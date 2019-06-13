@@ -30,16 +30,18 @@ class Solution:
 
         return array[high]
 
+    # uses Hoare-Partition
     def PartititonArray(self, array, low, high, pivot):
         j = high - 1
         i = low
 
         while True:
 
-            while array[i] <= pivot and i != high:
+            # both sides should stop in order to
+            while array[i] < pivot and i != high:
                 i += 1
 
-            while array[j] >= pivot and j != low:
+            while array[j] > pivot and j != low:
                 j -= 1
 
             if i < j:

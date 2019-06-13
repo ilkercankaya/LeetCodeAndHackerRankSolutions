@@ -107,7 +107,11 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
         2. For instance if i stops and j does not stop all elements equal to the pivot end up in S2
         3. If i and j both stop when they see elements equal to the pivot, there will be many swaps between identical elements. Although this seems useless, the positive effect is that i and j will cross in the middle, so the partition creates (nearly)  equal sized partitions.
         4. Consequently, if i and j do NOT stop, this would create very uneven partitions. (similar to choosing the first element!)
-    
+     17. **Partition Algorithms**:   
+        1. **Hoare-Partition:** Uses i = start and j = end and iterates until a bigger or equal element than pivot is found on the ith index, smaller or equal than pivot element is found at jth index. Swaps them in-between. Repeats until i < j.  
+        2. **Lomuto-Partition:** Init pIndex = start, iterate from start to end -1 and check if an element is smaller then the pivot, if so change the elements at i and pIndex and increment pIndex. Idea is to push all the elements that are less than pivot to the left. Lastly swap the pivot and the element at pIndex.
+        3. Hoare-Partition is faster than Lomuto-Partition but Lomuto is easier to understand and implement.
+        
 * **Quick Select:** Use the idea of partitioning recursively to find the kth smallest element. This makes one recursive call instead of two as in Naive Quicksort. Average O(N) time complexity, worst O(N^2). Use a good pivot to avoid worst.
     1. T(n) = cn + T(n/2)
     2. c(n + n/2 + n/4 + ... + 2 + 1) = c(2n) = O(n) 
