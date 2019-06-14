@@ -1,7 +1,7 @@
 import math, json
 
 
-# passes all test cases inhttps://leetcode.com/problems/kth-largest-element-in-an-array/submissions/
+# passes all test cases in https://leetcode.com/problems/kth-largest-element-in-an-array/submissions/
 
 class Solution:
 
