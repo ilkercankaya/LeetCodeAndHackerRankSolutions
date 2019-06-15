@@ -92,8 +92,9 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
     9. [Space complexity reduce method.](https://www.geeksforgeeks.org/quicksort-tail-call-optimization-reducing-worst-case-space-log-n/amp/) After partitioning, the partition with the fewest elements is (recursively) sorted first, requiring at most O(log n) space. Then the other partition is sorted using tail recursion or iteration, which doesn't add to the call stack. This idea, as discussed above, was described by R. Sedgewick, and keeps the stack depth bounded by O(log n).
     10. [Check Method II For Complete Explanation Space Complexity.](http://www.cs.nthu.edu.tw/~wkhon/algo08-tutorials/tutorial2b.pdf) if (there is X with length(X) < n/2) call Qsort(X) else partition X into X’and X’’ until all X are processed
         1. The idea of Method II is tail recursion
-        2. Call recursion only when sub-problem is small enough
-        3. First solves sub-problem with smaller size
+        2. Call recursion only when sub-problem is small enough (N/2)
+        3. Only doing recursion when a sub-array with (N/2) is there makes sure that O(log n) is met.
+        4. First solves sub-problem with smaller size
     11. Average and Best Running time of O(N logN) due to logN times (best pivot picking) partitioning (which has O(N) time complexity).
     12. Worst case of O(N^2) due to picking the smallest as the pivot leads to N calls to partitioning (which has O(N) time complexity).
     13. This is a tail recursive algorithm.
@@ -111,7 +112,8 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
         1. **Hoare-Partition:** Uses i = start and j = end and iterates until a bigger or equal element than pivot is found on the ith index, smaller or equal than pivot element is found at jth index. Swaps them in-between. Repeats until i < j.  
         2. **Lomuto-Partition:** Init pIndex = start, iterate from start to end -1 and check if an element is smaller then the pivot, if so change the elements at i and pIndex and increment pIndex. Idea is to push all the elements that are less than pivot to the left. Lastly swap the pivot and the element at pIndex.
         3. Hoare-Partition is faster than Lomuto-Partition but Lomuto is easier to understand and implement.
-        
+     18. **In-place or not:** Yes it is. In-place means that the algorithm does not use extra space for manipulating the input but may require a small though nonconstant extra space for its operation. Usually, this space is O(log n), though sometimes anything in o(n) (Smaller than linear) is allowed.
+     
 * **Quick Select:** Use the idea of partitioning recursively to find the kth smallest element. This makes one recursive call instead of two as in Naive Quicksort. Average O(N) time complexity, worst O(N^2). Use a good pivot to avoid worst.
     1. T(n) = cn + T(n/2)
     2. c(n + n/2 + n/4 + ... + 2 + 1) = c(2n) = O(n) 
@@ -132,12 +134,31 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
     
 * **Call Stack:** A call stack is a stack data structure that stores information about the active subroutines of a computer program. This kind of stack is also known as an execution stack, program stack, control stack, run-time stack, or machine stack, and is often shortened to just "the stack". [E.g.](https://www.youtube.com/watch?v=Q2sFmqvpBe0)
 
+* **Merge Sort:**
+    1. Divide And Conquer.
+    2. Split the array until arrays with one elements are met.
+    3. Examine the elements are store them back to temporary arrays.
+    4. Merge smaller sorted arrays into bigger arrays making the bigger arrays sorted.
+    5. **Merge:**
+        1. Requires two _**sorted**_ arrays.
+        2. Set i = 0, j = 0, a = 0. Iterate through sorted arrays by comparing their current indexes. Find the smaller element and add it to the bigger element and increment either i or j depending on where the element is picked from.
+        3. After the iterations finish there will be an only one array which its elements are not added since the comparing while loop checks for whether the size of each the arrays are met
+        . Use two while loops to add all of the left small arrays elements into the bigger array.
+        4. Time complexity O(m+ n). 
+    6. Space complexity O(n).
+    7. 
+
+* **Divide And Conquer:** Breaks a problem into subproblems that are similar to the original problem, recursively solves the subproblems, and finally combines the solutions to the subproblems to solve the original problem. Because divide-and-conquer solves subproblems recursively, each subproblem must be smaller than the original problem, and there must be a base case for subproblems.
+    1. Divide the problem into a number of subproblems that are smaller instances of the same problem.
+    2. Conquer the subproblems by solving them _**recursively**_. If they are small enough, solve the subproblems as base cases.
+    3. Combine the solutions to the subproblems into the solution for the original problem.
+    
+    
 * A _stable_ sorting algorithm is said to be if two objects with equal keys appear in the same order in sorted output as they appear in the input unsorted array. Some sorting algorithms are stable by nature like Insertion sort, Merge Sort, Bubble Sort, Count Sort. And some sorting algorithms are not, like Heap Sort, Quick Sort, etc.
 
 * **In-place vs out-of-place**:
-    1. In-place means that the algorithm is O(1) space. Algorithm that uses O(1) extra space in
-addition to the original input
-    1. Out-of-place means that the algorithm is NOT O(1) space.
+    1. In-place In-place means that the algorithm does not use extra space for manipulating the input but may require a small though nonconstant extra space for its operation. Usually, this space is O(log n), though sometimes anything in o(n) (Smaller than linear) is allowed. For array of 1073741824 size it is only taking 30 units of space.
+    2. Out-of-place means that the algorithm is NOT in-place so according to the definition above it is considered any space usage greater than O(log n).
     
 ***Priority Queue**: A priority queue is an abstract data type which is like a regular queue or stack data structure, but where additionally each element has a "priority" associated with it. In a priority queue, an element with high priority is served before an element with low priority.
 
