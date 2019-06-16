@@ -145,8 +145,9 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
         3. After the iterations finish there will be an only one array which its elements are not added since the comparing while loop checks for whether the size of each the arrays are met
         . Use two while loops to add all of the left small arrays elements into the bigger array.
         4. Time complexity O(m+ n). 
-    6. Space complexity O(n).
-    7. 
+    6. Space complexity O(n). [Explained here. ](https://www.youtube.com/watch?v=0nlPxaC2lTw&t=602s)Not an in-place algorithm. Naive version O(n logn) due to keeping all the arrays without deletion leads to n memory allocation in each level and since we are doing a total of log n allocations the complexity is O(n logn). If we delete the unused arrays we will have at most n (the left sub array and right subarray )+ right subbarays childs n / 2 + n / 4 + n/ 8... which is O(2n) which is O(n).
+    7. Stable sorting algorithm since making "L <= R" ensures that both array have the original order reserved since we favor the left side before right side. E.g 1 2 2 2 3 => Left, 2 2 2 4 5 => Right. If we favor right over left, the order will be changed since the original array is 1 2 2 2 3 2 2 2 4 5.
+    8. Time complexity O(n logn). Merge is O(m + n) = O(n) since m = n = n / 2, for loops are total of O(0 to middle) + O(middle to len(array)) = O(n). 
 
 * **Divide And Conquer:** Breaks a problem into subproblems that are similar to the original problem, recursively solves the subproblems, and finally combines the solutions to the subproblems to solve the original problem. Because divide-and-conquer solves subproblems recursively, each subproblem must be smaller than the original problem, and there must be a base case for subproblems.
     1. Divide the problem into a number of subproblems that are smaller instances of the same problem.
@@ -179,6 +180,7 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
     
 * Priority Queue vs Heap: A heap is an implementation of priority queue with BST's. A normal Priority Queue can have O(N) add time where as a heap has O(logN) add.
 
+* **Space complexity of a recursive function:** Look at the recursion tree and judge.
 * A full binary tree (sometimes proper binary tree or 2-tree) is a tree in which every node other than the leaves has two children. In a full binary tree all nodes have either 0 or 2 children. Both types of nodes can appear at all levels in the tree
 
 * A complete binary tree is a binary tree is a tree that follows the heap structures, add and remove from furthest breadth-first search see if the tree can be formed OR ANOTHER DEF: At the level above the leaves nodes can have 0, 1 or 2 children. ALSO, the last level must be filled from left to right without leaving any gaps. Other than these levels all nodes must have 2 children.

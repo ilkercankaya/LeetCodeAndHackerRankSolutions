@@ -27,6 +27,28 @@ def Merge(a, b, mergedList):
 
 
 def MergeSort(array):
+    # covers both empty and one element arrays
+    n = len(array)
+    if n < 2:
+        return
+
+    midPoint = n // 2
+
+    # split array into left and right
+    left = [] * midPoint
+    for i in range(midPoint):
+        left.append(array[i])
+
+    right = [] * (n - midPoint)
+    for i in range(midPoint, n):
+        right.append(array[i])
+
+    # mergesort the left and right recursively
+    MergeSort(left)
+    MergeSort(right)
+
+    # merge the lists
+    Merge(left, right, array)
 
 
 # list1 = [1, 2, 6, 8, 9]
@@ -38,3 +60,5 @@ def MergeSort(array):
 # print(merged)
 
 listNums = [1, 4, 5, 2, 4, 8, 13, 11, 10, 24, 28, 24, 29, 27]
+MergeSort(listNums)
+print(listNums)
