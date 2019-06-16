@@ -30,6 +30,27 @@
 
 * Balanced Tree Assumption On Interviews
 
+* **[Time Analysis:](https://www.geeksforgeeks.org/analysis-of-algorithms-set-3asymptotic-notations/)**
+    1. **Big-O:** Upper bound. The Big O notation defines an upper bound of an algorithm, it bounds a function only from above.
+                            
+                  O(g(n)) = { f(n): there exist positive constants c and 
+                  n0 such that 0 <= f(n) <= c*g(n) for all n >= n0}
+    2. **Ω Omega Notation:** Ω notation provides an asymptotic lower bound. Generally not useful.
+            
+            Ω (g(n)) = {f(n): there exist positive constants c and
+            n0 such that 0 <= c*g(n) <= f(n) forall n >= n0}.
+                  
+    3. **Θ Theta Notation:** The theta notation bounds a functions from above and below, so it defines exact asymptotic behavior. One can think of this as both Omega and Big-O Notation holds for the given theta notation.
+    A simple way to get Theta notation of an expression is to drop low order terms and ignore leading constants. For example, consider the following expression.
+3n3 + 6n2 + 6000 = Θ(n3)
+    
+            Θ(g(n)) = {f(n): there exist positive constants c1, c2 and n0
+            such that 0 <= c1*g(n) <= f(n) <= c2*g(n) for all n >= n0}
+    
+
+* **[Average Case Analysis:](https://www.youtube.com/watch?v=ElhIcC4f710)** Sigma * P(i) * Cost(i). [Another Source Here](https://www.geeksforgeeks.org/analysis-of-algorithms-set-2-asymptotic-analysis/)
+    
+    
 * Trie -> reTrieval [Video Explanation Here](https://www.youtube.com/watch?v=-urNrIAQnNo)
     1. A tree that stores strings. Used for string search such as prefix, suffix. [E.g](https://www.hackerrank.com/challenges/contacts/problem)
     2. Can be used for word validation such as when the user is typing a word we can look up trie to see if the word is valid and maybe even suggest to complete the words.
@@ -51,8 +72,12 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
 
 * Binary-tree -> Recursion or Queues
 
+* **Recursion:** Recursion is an approach to solving problems using a function that calls itself as a subroutine. The recursion call continues until it reaches a point where the subproblem can be solved without further recursion. A recursive function should have the following properties so that it does not result in an infinite loop:
+    1. A simple **_base case_** (or cases) — a terminating scenario that does not use recursion to produce an answer.
+    2. A set of rules, also known as _**recurrence relation**_ that reduces all other cases towards the base case.
+
 * Recursion time complexity: [Example Here.](https://www.youtube.com/watch?v=gCsfk2ei2R8)
-    1. **Substitution Method:** We make a guess for the solution and then we use mathematical induction to prove the the guess is correct or incorrect.
+    1. **Substitution Method:** We make a guess for the solution and then we use mathematical induction to prove the the guess is correct or incorrect. K here is the step number. It is not and random number.
 
     2. **Recurrence Tree Method:** In this method, we draw a recurrence tree and calculate the time taken by every level of tree.The pattern is typically a arithmetic or geometric series.
 
@@ -145,7 +170,7 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
         3. After the iterations finish there will be an only one array which its elements are not added since the comparing while loop checks for whether the size of each the arrays are met
         . Use two while loops to add all of the left small arrays elements into the bigger array.
         4. Time complexity O(m+ n). 
-    6. Space complexity O(n). [Explained here. ](https://www.youtube.com/watch?v=0nlPxaC2lTw&t=602s)Not an in-place algorithm. Naive version O(n logn) due to keeping all the arrays without deletion leads to n memory allocation in each level and since we are doing a total of log n allocations the complexity is O(n logn). If we delete the unused arrays we will have at most n (the left sub array and right subarray )+ right subbarays childs n / 2 + n / 4 + n/ 8... which is O(2n) which is O(n).
+    6. Space complexity O(n). .If stack frames is counted, then it's O(n)+ O(log n). [Explained here. ](https://www.youtube.com/watch?v=0nlPxaC2lTw&t=602s)Not an in-place algorithm. Naive version O(n logn) due to keeping all the arrays without deletion leads to n memory allocation in each level and since we are doing a total of log n allocations the complexity is O(n logn). If we delete the unused arrays we will have at most n (the left sub array and right subarray )+ right subbarays childs n / 2 + n / 4 + n/ 8... which is O(2n) which is O(n).
     7. Stable sorting algorithm since making "L <= R" ensures that both array have the original order reserved since we favor the left side before right side. E.g 1 2 2 2 3 => Left, 2 2 2 4 5 => Right. If we favor right over left, the order will be changed since the original array is 1 2 2 2 3 2 2 2 4 5.
     8. Time complexity O(n logn). Merge is O(m + n) = O(n) since m = n = n / 2, for loops are total of O(0 to middle) + O(middle to len(array)) = O(n). 
 
@@ -180,7 +205,10 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
     
 * Priority Queue vs Heap: A heap is an implementation of priority queue with BST's. A normal Priority Queue can have O(N) add time where as a heap has O(logN) add.
 
-* **Space complexity of a recursive function:** Look at the recursion tree and judge.
+* **Dangling pointers:** Pointer which points to a de-allocated memory. Happens generally when two pointers are pointing towards the same memory address. Could lead to crashes.
+
+* **Space complexity of a recursive function:** Look at the recursion tree and try to capture a moment where the recursion call stack is at its max. Iterate from beginning to end if your are having bad time. Just because the recursive calls are high does not mean that the space complexity will be high.
+
 * A full binary tree (sometimes proper binary tree or 2-tree) is a tree in which every node other than the leaves has two children. In a full binary tree all nodes have either 0 or 2 children. Both types of nodes can appear at all levels in the tree
 
 * A complete binary tree is a binary tree is a tree that follows the heap structures, add and remove from furthest breadth-first search see if the tree can be formed OR ANOTHER DEF: At the level above the leaves nodes can have 0, 1 or 2 children. ALSO, the last level must be filled from left to right without leaving any gaps. Other than these levels all nodes must have 2 children.
