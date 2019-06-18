@@ -54,7 +54,6 @@
 * Trie -> reTrieval [Video Explanation Here](https://www.youtube.com/watch?v=-urNrIAQnNo)
     1. A tree that stores strings. Used for string search such as prefix, suffix. [E.g](https://www.hackerrank.com/challenges/contacts/problem)
     2. Can be used for word validation such as when the user is typing a word we can look up trie to see if the word is valid and maybe even suggest to complete the words.
-    
     3. A  well balanced BST will need time proportional to M * log N, where M is maximum string length and N is number of keys in tree. The crucial point here is that unlike a BST with numbers your comparison complexity at any node is not O(1) but instead O(m) (Since in the worst case your string at any node differs from your pattern at the last letter).
 In the worst case you'll have to compare your pattern with O(log n) nodes.
     4. Using Trie, we can search the key in O(M) time. 
@@ -73,8 +72,22 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
 * Binary-tree -> Recursion or Queues
 
 * **Recursion:** Recursion is an approach to solving problems using a function that calls itself as a subroutine. The recursion call continues until it reaches a point where the subproblem can be solved without further recursion. A recursive function should have the following properties so that it does not result in an infinite loop:
-    1. A simple **_base case_** (or cases) — a terminating scenario that does not use recursion to produce an answer.
+    1. A simple **_base case_** (or cases) also known as _bottom case_ — a terminating scenario that does not use recursion to produce an answer.
     2. A set of rules, also known as _**recurrence relation**_ that reduces all other cases towards the base case.
+    3. Define recurrence relation and base cases then went to implement.
+    
+* There are mainly two parts of the space consumption that one should bear in mind when calculating the space complexity of a recursion algorithm: **recursion related** and **non-recursion related space.**
+
+* Execution tree, which is a tree that is used to denote the execution flow of a recursive function in particular. Each node in the tree represents an invocation of the recursive function. Therefore, the total number of nodes in the tree corresponds to the number of recursion calls during the execution. Could be used to approximate time complexity.
+
+* Given a recursion algorithm, its time complexity O(T) is typically the product of the number of recursion invocations (denoted as R) and the time complexity of calculation (denoted as O(s) that incurs along with each recursion call:
+    1. **O(T) = R * O(s)**
+    2. One could also use **Master Theorem** to find the answer.
+    
+* **Memoization** is an optimization technique used primarily to speed up computer programs by storing the results of expensive function calls and returning the cached result when the same inputs occur again. The memoization technique is a good example that demonstrates how one can reduce compute time in exchange for some additional space.
+
+
+* **Dynamic Programming:**
 
 * Recursion time complexity: [Example Here.](https://www.youtube.com/watch?v=gCsfk2ei2R8)
     1. **Substitution Method:** We make a guess for the solution and then we use mathematical induction to prove the the guess is correct or incorrect. K here is the step number. It is not and random number.
@@ -152,11 +165,11 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
            } else {
               return n * factorial(n - 1);
            }
-    2. **Tail Recursion**: A recursive function is tail recursive when recursive call is the last thing executed by the function.
+    2. **Tail Recursion**: A recursive function is tail recursive when recursive call is the last thing executed by the function. C, C++ support the optimization of tail recursion functions. On the other hand, Java and Python do not support tail recursion optimization.
     3. Tail recursion doesnt add to the call stack. [E.g.](https://stackoverflow.com/questions/33923/what-is-tail-recursion) 
     Although some languages does not support it such as Java.
     4. _Tail call elimination:_ The tail recursive functions considered better than non tail recursive functions as tail-recursion can be optimized by compiler. The idea used by compilers to optimize tail-recursive functions is simple, since the recursive call is the last statement, there is nothing left to do in the current function, so saving the current function’s stack frame is of no use 
-    
+    5. Tail recursion could optimize the space complexity of the algorithm, by eliminating the stack overhead incurred by recursion. More importantly, with tail recursion, one could avoid the problem of stack overflow that comes often with recursion
 * **Call Stack:** A call stack is a stack data structure that stores information about the active subroutines of a computer program. This kind of stack is also known as an execution stack, program stack, control stack, run-time stack, or machine stack, and is often shortened to just "the stack". [E.g.](https://www.youtube.com/watch?v=Q2sFmqvpBe0)
 
 * **Merge Sort:**
@@ -218,6 +231,8 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
 * **Depth** Of Root = 0 (Same as level), **Height** of Leaf = 0, The depth of a node is the number of edges from the node to the tree's root node.
 A root node will have a depth of 0. The height of a node is the number of edges on the longest path from the node to a leaf.
 A leaf node will have a height of 0.
+
+*  A leaf is a node with no children.
 
 * Maximum number of nodes in a height of h with n nodes: ceil(n / (2^(h + 1)))
 
