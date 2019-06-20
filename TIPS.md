@@ -50,7 +50,29 @@
 
 * **[Average Case Analysis:](https://www.youtube.com/watch?v=ElhIcC4f710)** Sigma * P(i) * Cost(i). [Another Source Here](https://www.geeksforgeeks.org/analysis-of-algorithms-set-2-asymptotic-analysis/)
     
-    
+* Shallow Copy vs Deep Copy: [:] Operator - Shallow [Explained Here.](https://medium.com/@thawsitt/assignment-vs-shallow-copy-vs-deep-copy-in-python-f70c2f0ebd86)  
+           
+            a = [1,2,3,4]
+            # Copy the pointer of a into b
+            b = a
+            
+            
+            a = [1,2,3,4]
+            b = a[:]
+            b[0] = 100
+            a -> [1,2,3,4]
+            b -> [100,2,3,4]
+            
+            
+            a = [[1, 2], [2, 4]]
+            b = a[:] #shallow copy
+            >> b[0].append(3)  ## Edit the first element (i.e. [1, 2])
+            >> b
+            >> [[1, 2, 3], [2, 4]]
+            
+            >> a
+            >> [[1, 2, 3], [2, 4]]
+
 * Trie -> reTrieval [Video Explanation Here](https://www.youtube.com/watch?v=-urNrIAQnNo)
     1. A tree that stores strings. Used for string search such as prefix, suffix. [E.g](https://www.hackerrank.com/challenges/contacts/problem)
     2. Can be used for word validation such as when the user is typing a word we can look up trie to see if the word is valid and maybe even suggest to complete the words.
@@ -64,8 +86,23 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
     1. Inorder: Left First Then Root Then Right
     1. Preorder: Root First Then Left then Right 
     1. Postorder: Left Then Right Then Root
-  
-* Depth-first search = Depth increases gradually
+    1. Look at the root position and made will be clear.
+    1. Post-order is widely use in [mathematical expression. E.g.](https://leetcode.com/explore/learn/card/data-structure-tree/134/traverse-a-tree/992/). It is easier to write a program to parse a post-order expression. You can easily figure out the original expression using the inorder traversal. However, it is not easy for a program to handle this expression since you have to check the priorities of operations. If you handle this tree in postorder, you can easily handle the expression using a stack. Each time when you meet a operator, you can just pop 2 elements from the stack, calculate the result and push the result back into the stack.
+
+*  _**Top-down vs Bottom-up:**_
+    1. **_"Top-down" Solution:_**
+    "Top-down" means that in each recursion level, we will visit the node first to come up with some values, and pass these values to its children when calling the function recursively. So the "top-down" solution can be considered as kind of preorder traversal. Could also be used with tail call optimization if possible.
+
+    2. _**"Bottom-up" Solution:**_
+    "Bottom-up" is another recursion solution. In each recursion level, we will firstly call the functions recursively for all the children nodes and then come up with the answer according to the return values and the value of the root node itself. This process can be regarded as kind of postorder traversal. 
+    
+    3. Can you determine some parameters to help the node know the answer of itself? Can you use these parameters and the value of the node itself to determine what should be the parameters parsing to its children? If the answers are both yes, try to solve this problem using a "top-down" recursion solution.
+
+    4. Or you can think the problem in this way: for a node in a tree, if you know the answer of its children, can you calculate the answer of the node? If the answer is yes, solving the problem recursively from bottom up might be a good way.
+
+* To understand if a code is "Top-down" or "Bottom-Up" check the code. Imagine the call stack.
+
+* Depth-first search = Depth increases gradually 
 
 * Breadth-first search = Breadth increases gradually - Check the code for the Binary Search Tree
 
@@ -77,7 +114,16 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
     3. Define recurrence relation and base cases then went to implement.
     
 * There are mainly two parts of the space consumption that one should bear in mind when calculating the space complexity of a recursion algorithm: **recursion related** and **non-recursion related space.**
+    1. **Recursion Related Space:** The recursion related space refers to the memory cost that is incurred directly by the recursion, i.e. the stack to keep track of recursive function calls. In order to complete a typical function call, the system should allocate some space in the stack to hold three important pieces of information:
+        1. The returning address of the function call. Once the function call is completed, the program should know where to return to, i.e. the point before the function call; 
+        2. The parameters that are passed to the function call; 
+        3. The local variables within the function call.
+        4. Example: Mergesort making copies of the array into subarrays in each iteration. Keeping previous iterations from the program such as the fibonacci series is not RRS!
+    2. **Non-Recursion Related Space:** As suggested by the name, the non-recursion related space refers to the memory space that is not directly related to recursion, which typically includes the space (normally in heap) that is allocated for the global variables. 
+        1. E.g: Keeping the values of previous fibonacci series calculations in a hashmap.
 
+* It is due to these recursion related space consumption that sometimes one might run into a situation called stack overflow, where the stack allocated for a program reaches its maximum space limit and the program ends up with failure. Therefore, when designing a recursion algorithm, one should carefully evaluate if there is a possibility of stack overflow when the input scales up.
+        
 * Execution tree, which is a tree that is used to denote the execution flow of a recursive function in particular. Each node in the tree represents an invocation of the recursive function. Therefore, the total number of nodes in the tree corresponds to the number of recursion calls during the execution. Could be used to approximate time complexity.
 
 * Given a recursion algorithm, its time complexity O(T) is typically the product of the number of recursion invocations (denoted as R) and the time complexity of calculation (denoted as O(s) that incurs along with each recursion call:
@@ -88,6 +134,18 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
 
 
 * **Dynamic Programming:**
+    1. _**Optimal substructure**_  — optimal solution can be constructed from optimal solutions of its subproblems.
+    2. _**Overlapping sub-problems**_  — problem can be broken down into subproblems which are reused several times or a recursive algorithm for the problem solves the same subproblem over and over rather than always generating new subproblems.
+    3. Once these two conditions are met we can say that this divide and conquer problem may be solved using dynamic programming approach.
+    3. Requires i. and ii. and could also have extra methodologies either _**Memoization**_(Top-Down) or _**Tabulation**_(Bottom-Up)
+    4. _**Memoization (uses top-down cache filling)**_  It starts with the highest-level subproblems (the ones closest to the original problem), and recursively calls the next subproblem, and the next. We save time when a subproblem A recurses into a subproblem B that has already been called. Since B and all subproblems below it are memoized, we can avoid repeating the entire recursion tree generated by B, saving a lot of computation.
+    5. _**Tabulation (uses bottom-up cache filling)**_ It starts by solving the lowest level subproblem. The solution then lets us solve the next subproblem, and so forth. We iteratively solve all subproblems in this way until we’ve solved all subproblems, thus finding the solution to the original problem. We save time when a subproblem needs the answer to a subproblem that has been called before, and thus has had its value tabulated.
+    6. The major differences between tabulation and memoization are:
+        1. Tabulation has to look through the entire search space; memoization does not.
+        2. Tabulation requires careful ordering of the subproblems is; memoization doesn’t care much about the order of recursive calls.
+        3. If the original problem requires all subproblems to be solved, tabulation usually outperformes memoization by a constant factor. This is because tabulation has no overhead for recursion.
+        4. If only some of the subproblems needs to be solved for the original problem to be solved, then memoization is preferrable since the subproblems are solved lazily, i.e. precisely the computations needed are carried out.
+    7. Could be taught as dynamic programming is an extension of divide and conquer paradigm.
 
 * Recursion time complexity: [Example Here.](https://www.youtube.com/watch?v=gCsfk2ei2R8)
     1. **Substitution Method:** We make a guess for the solution and then we use mathematical induction to prove the the guess is correct or incorrect. K here is the step number. It is not and random number.
@@ -170,6 +228,8 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
     Although some languages does not support it such as Java.
     4. _Tail call elimination:_ The tail recursive functions considered better than non tail recursive functions as tail-recursion can be optimized by compiler. The idea used by compilers to optimize tail-recursive functions is simple, since the recursive call is the last statement, there is nothing left to do in the current function, so saving the current function’s stack frame is of no use 
     5. Tail recursion could optimize the space complexity of the algorithm, by eliminating the stack overhead incurred by recursion. More importantly, with tail recursion, one could avoid the problem of stack overflow that comes often with recursion
+    6. Another advantage about tail recursion is that often times it is easier to read and understand, compared to non-tail-recursion. Because there is no post-call dependency in tail recursion (i.e. the recursive call is the final action in the function), unlike non-tail-recursion. 
+
 * **Call Stack:** A call stack is a stack data structure that stores information about the active subroutines of a computer program. This kind of stack is also known as an execution stack, program stack, control stack, run-time stack, or machine stack, and is often shortened to just "the stack". [E.g.](https://www.youtube.com/watch?v=Q2sFmqvpBe0)
 
 * **Merge Sort:**
