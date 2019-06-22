@@ -73,6 +73,11 @@
             >> a
             >> [[1, 2, 3], [2, 4]]
 
+* **Queue vs. Stack**:
+    1. Queue: FIFO (First in First Out). The insert operation is also called **enqueue** and the new element is always added at the end of the queue. The delete operation is called **dequeue**. You are only allowed to remove the first element. To implement a queue, we may use a dynamic structure such as a vector or a linked list.
+        1. Circular Queue: We may use a fixed-size array and two pointers to indicate the starting position and the ending position. And the goal is to reuse the wasted storage we mentioned previously.
+    2. Stack: First in Last Out.
+    
 * Trie -> reTrieval [Video Explanation Here](https://www.youtube.com/watch?v=-urNrIAQnNo)
     1. A tree that stores strings. Used for string search such as prefix, suffix. [E.g](https://www.hackerrank.com/challenges/contacts/problem)
     2. Can be used for word validation such as when the user is typing a word we can look up trie to see if the word is valid and maybe even suggest to complete the words.
@@ -175,6 +180,8 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
     4. Space Complexity O(1) since the root is swapped with the last element before the heapify call. [E.g.](https://stackoverflow.com/questions/22233532/why-does-heap-sort-have-a-space-complexity-of-o1)
     5. Ascending sort -> Form a Max-Heap, Descending Sort -> Form a min-heap.
     6. Build Max Heap: Start from non last leafs (len(A) // 2 - 1 for 0 index) and call heapify down, NOT HEAPIFY UP, this is because build max heap traverses from last non leaf node and keeps making the subtrees a heap, if heapify up was called it would mess the subtrees with the elements coming from up. [E.g.](https://www.youtube.com/watch?v=HI97KDV23Ig)
+        1. O(N) times, [Time Complexity proof Here!](https://www.geeksforgeeks.org/time-complexity-of-building-a-heap/)
+        2. Sum of Geometric Series [Explained Here!](https://www.youtube.com/watch?v=-5kIBPR2Npk)
 
 * **Quicksort (Also known as Partition Sort):**
     1. Pivot: All the elements smallers than pivot should be on left and all the elements greater than pivot should be on right.
