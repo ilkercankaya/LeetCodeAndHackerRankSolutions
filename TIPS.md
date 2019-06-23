@@ -152,6 +152,7 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
         4. If only some of the subproblems needs to be solved for the original problem to be solved, then memoization is preferrable since the subproblems are solved lazily, i.e. precisely the computations needed are carried out.
     7. Could be taught as dynamic programming is an extension of divide and conquer paradigm.
 
+* Top-down and Bottom-Up are not the same in DP and BT algorithms. Top-down in DP means solving subproblems to solve the bigger problem where are in BT this is considered as bottom-up. (Imagine the execution tree.) 
 * Recursion time complexity: [Example Here.](https://www.youtube.com/watch?v=gCsfk2ei2R8)
     1. **Substitution Method:** We make a guess for the solution and then we use mathematical induction to prove the the guess is correct or incorrect. K here is the step number. It is not and random number.
 
