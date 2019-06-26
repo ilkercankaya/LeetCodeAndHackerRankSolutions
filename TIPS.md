@@ -321,7 +321,9 @@ A leaf node will have a height of 0.
 
 * DFS can suffer from stack overflow if the recursion number is too high. We can use a iterative stack version to overcome this since recursion limit is generally smaller than stack size limit. Python has 1000 as recursion limit by default.
 
-* 
+* 2D - Arrays:
+    1. **C++** stores the two-dimensional array as a one-dimensional array. So actually A[i][j] equals to A[i * N + j] if we defined A as a one-dimensional array which also contains M * N elements.
+    2. **In Java**, the two-dimensional array is actually a one-dimensional array which contains M elements, each of which is an array of N integers.
 
 ## Behavioural Part
 
