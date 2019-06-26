@@ -313,7 +313,15 @@ A leaf node will have a height of 0.
     
     4. In a multi-threaded situation each thread will have its own completely independent stack but they will share the heap. Stack is thread specific and Heap is application specific. The stack is important to consider in exception handling and thread executions.
 
+* If a node X is added to the queue in the kth round, the length of the shortest path between the root node and X is exactly k. That is to say, you are already in the shortest path the first time you find the target node. 
 
+* The first path you found in DFS is not always the shortest path.
+
+* DFS and BFS could be written with same algorithm iteratively - using Queue(BFS), Stack(DFS)
+
+* DFS can suffer from stack overflow if the recursion number is too high. We can use a iterative stack version to overcome this since recursion limit is generally smaller than stack size limit. Python has 1000 as recursion limit by default.
+
+* 
 
 ## Behavioural Part
 
