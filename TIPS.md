@@ -325,6 +325,134 @@ A leaf node will have a height of 0.
     1. **C++** stores the two-dimensional array as a one-dimensional array. So actually A[i][j] equals to A[i * N + j] if we defined A as a one-dimensional array which also contains M * N elements.
     2. **In Java**, the two-dimensional array is actually a one-dimensional array which contains M elements, each of which is an array of N integers.
 
+* String comparison:
+     1. **C++,** we may use "==" to compare two strings due to built-in operator overloading
+     2. **Java,** we may not use "==" to compare two strings. When we use "==", it actually compares whether these two objects are the same object.
+
+* In some languages (like C++), the string is mutable. That is to say, you can modify the string just like what you did in an array. In some other languages (like Java and Python), the string is immutable. 
+This feature will bring several problems. [Check Java Here](https://leetcode.com/playground/g4kbNuNZ)
+
+* In Java, strings s1 + s2 is O(s1.length() + s2.length()) since each string is copied into a new string two consecutive for loops .
+ if you assume N concatenations of Strings of length M, then the complexity is O(M * N ^ 2).
+ 
+* In Java, since the string is immutable, concatenation works by first allocating enough space for the new string, copy the contents from the old string and append to the new string.
+            
+        int n = 10000;
+        for (int i = 0; i < n; i++) {
+            s += "hello";
+        }
+    Therefore, the time complexity in total will be:
+5 + 5 × 2 + 5 × 3 + … + 5 × n
+= 5 × (1 + 2 + 3 + … + n)
+= 5 × n × (n + 1) / 2,
+
+    With StringBuilder this could be reduced to O(M * N) where M is the size of the string.
+
+* If you did want your string to be mutable, you can convert it to a char array then modify and convert back to a string.
+
+* StringBuffer is synchronized, meaning thread safe. This means that two threads can’t call StringBuffer methods simultaneously. On the other hand, StringBuilder is non-synchronized, meaning not thread safe though StringBuilder is faster.
+
+* Usually, StringBuffer.append simply needs to add its input to the end of its buffer. The amount of time this takes has no dependency on the current size of the StringBuffer. 
+
+* Never forget to take the time complexity of built-in operations into consideration when you compute the time complexity for your solution.
+
+* Use _**two-pointer technique**_ is that you want to iterate the array from two ends to the middle. So you can use the two-pointer technique:
+One pointer starts from the beginning while the other pointer starts from the end.
+And it is worth noting that this technique is often used in a _**sorted array**_.
+
+* Using the two-pointer technique when you need:
+    1. One slow-runner and one fast-runner at the same time.
+    * The key to solving with this kind of strategy:
+    2. Determine the movement strategy for both pointers.
+ 
+* _**Amortized Analysis**_ is used for algorithms where an occasional operation is very slow, but most of the other operations are faster. In Amortized Analysis, we analyze a sequence of operations and guarantee a worst case average time which is lower than the worst case time of a particular expensive operation. [E.g](https://www.geeksforgeeks.org/analysis-algorithm-set-5-amortized-analysis-introduction/)
+    1. The amortized analysis doesn’t involve probability. There is also another different notion of average case running time where algorithms use randomization to make them faster and expected running time is faster than the worst case running time. These algorithms are analyzed using Randomized Analysis. Examples of these algorithms are Randomized Quick Sort, Quick Select and Hashing. We will soon be covering Randomized analysis in a different post.
+    2. The Amortized Analysis done for Dynamic Array example is called Aggregate Method.
+ 
+* In Java, _**Vector vs ArrayList:**_ [Read it Here.](https://www.geeksforgeeks.org/vector-vs-arraylist-java/)
+    1. Vector is _**synchronized**_, which means only one thread at a time can access the code, while arrayList is not synchronized, which means multiple threads can work on arrayList at the same time
+    2. ArrayList is **_faster_**, since it is non-synchronized, while vector operations give slower performance since they are synchronized (thread-safe). If one thread works on a vector, it has acquired a lock on it, which forces any other thread wanting to work on it to have to wait until the lock is released.
+    3.  ArrayList and Vector both grow and shrink dynamically to maintain optimal use of storage – but the way they resize is different. ArrayList increments 50% of the current array size if the number of elements exceeds its capacity, while vector increments 100% – essentially doubling the current array size.
+
+* **_Fail-fast vs Fail-safe:_** [Read it Here.](https://javaconceptoftheday.com/fail-fast-and-fail-safe-iterators-in-java-with-examples/)
+    1. A system is called fail-fast if it is shut down immediately when an error occurred. These systems don’t carry on with the errors. They immediately stop operating when a fault is occurred in the system. The errors in the fail-fast systems are immediately exposed. 
+        But, fail-safe systems are not like that. They don’t stop operating even when a fault is occurred in the system. They continue the operation by hiding the errors. They don’t expose the errors immediately. They carry on with the errors.
+    2. Iterators in java give us the facility to traverse over the Collection objects. Iterators returned by the Collection are either fail-fast in nature or fail-safe in nature. Fail-Fast iterators immediately throw ConcurrentModificationException if a collection is modified while iterating over it.
+       Where as Fail-Safe iterators don’t throw any exceptions if a collection is modified while iterating over it. Because, they operate on the clone of the collection, not on the actual collection.
+       But, they don’t throw any exceptions if the collection is modified by the iterator’s own methods like remove().
+    3. Fail-fast method uses the following to know whether the collection is modified or not, they use an internal flag called modCount which is updated each time a collection is modified. Every time when an Iterator calls the next() method, it checks the modCount. If it finds the modCount has been updated after this Iterator has been created, it throws ConcurrentModificationException.
+    4. Fail-Safe iterators don’t throw any exceptions if the collection is modified while iterating over it. Because, they iterate on the clone of the collection not on the actual collection. So, any structural modifications done on the actual collection goes unnoticed by these iterators. But, these iterators have some drawbacks. One of them is that it is not always guaranteed that you will get up-to-date data while iterating. Because any modifications to collection after the iterator has been created is not updated in the iterator. One more disadvantage of these iterators is that there will be additional overhead of creating the copy of the collection in terms of both time and memory.
+    5. The iterators returned by the ArrayList, Vector, HashMap etc are all Fail-Fast in nature.
+    6. Iterator returned by ConcurrentHashMap is a fail-safe iterator.
+
+* In Python consecutive comma operators are evaluated from right to left. All the expressions to the right of the assignment operator are evaluated before any of the assignments are made.
+            
+            a = 5
+            b = 4
+            a, b = a + b, a
+            print a, b
+            # 9, 5; first a is assigned to b and then a + b is assigned to a.
+
+* In linked list questions, _**two pointers approach**_ is very useful. It is also possible to navigate to the middle with tow-pointers approach
+by setting the speed difference to 1. This could be useful to do things in one pass.
+
+* Dummy Head could also be helpful to iterate over linked list with ease. Create a new head with empty val and then attach it as the head and connect the original linked list to it and iterate over it. In the end, delete the head or return head.next as the new head.
+
+* Analysis of Linked-Lists
+   * In linked lists delete and add operations are considered O(1) if we know the nodes that we need to operate on if not depending on whether it is a singly linked list or a doubly time complexity could vary up to O(N).
+   Generally they are assumed to be O(1) since we do not need to shift each elements like in an array deletion.
+   * However, there is an intuitive way to make the delete O(1). Might cause errors which I can not tell directly. [Question Here!](https://leetcode.com/problems/delete-node-in-a-linked-list/)
+   * Delete operation in a doubly-linked-list would be truly O(1) if we were given the node to delete since the node has next and prev we could traverse in O(1) time
+but in singly linked list it would be O(N) since we would need to find the nodes prev to delete it and re-link.
+   * [Full Time Complexity Table Here](https://s3-lc-upload.s3.amazonaws.com/uploads/2018/04/29/screen-shot-2018-04-28-at-174531.png)
+   
+* A Closure is a function object that remembers values in enclosing scopes even if they are not present in memory.
+            
+            # example 1
+            def make_printer(msg):
+                def printer():
+                    print msg
+                return printer
+            
+            printer = make_printer('Foo!')
+            printer()
+            
+            # example 2
+            def Counter(x):
+                # x += 10 makes x increment by 10
+                message = "I am a closure"
+                def _increment():
+                    nonlocal x
+                    x += 1
+                    print(x, message)
+                return _increment
+            
+            
+            counter = Counter(0)
+            counter() #1
+            counter() #1
+            counter() #1
+            
+            def make_printer(msg):
+                def printer(msg=msg):
+                    print msg
+                return printer
+            # this is not an enclosure since msg is also a local variable of printer since it was passed with parameter call
+            
+  * What is going above is that When _Counter_ is called, a new frame is put on the stack with the compiled code for the printer function as a constant and the value of _x and message_ as a local. It then creates and returns the function. Because the function printer references the _x and message_ variable, it is kept alive after the _Counter_ function has returned.
+
+  * This technique by which the data is attached to some code even after end of those other original functions is called as closures in python.
+
+  * Increment is being called with the function calls and it has stored _x and message_ as locals from the inital call of Counter(0). 
+
+  * Nested and enclosure functions only have read-only access to the enclosing scope of variables if nonlocal keyword is not specified.
+  
+* When and why to use Closures:
+     1. As closures are used as callback functions, they provide data hiding. This helps us to reduce the use of global variables.
+        
+     2. When we have few functions in our code, closures prove to be efficient way. But if we need to have many functions, then go for class (OOP).
+
+ * Matrix Rotation Problems (Rotate 90, 180, 270, 360 degree) could be with transpose with (right-to left fli or top-bottom flip) although the order of transpose and flips could differ.
 ## Behavioural Part
 
 * Resume Walk-Through

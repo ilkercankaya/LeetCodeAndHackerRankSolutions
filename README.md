@@ -1,10 +1,10 @@
 # Hacker Rank And Leet Code Solutions
 My solutions for the problems in Hacker Rank and Leet Code are shared. The solutions are provided by me. All of the solutions here are 
-passing all the test cases in the Hack Rank evaluation.
-
-[My Hacker Rank Account](https://www.hackerrank.com/ilkercankaya)
+passing all the test cases in the Hack Rank And Leet Code evaluation.
 
 [My Leet Code Account](https://leetcode.com/ilkercankaya/)
+
+[My Hacker Rank Account](https://www.hackerrank.com/ilkercankaya)
 
 ## The Folders and The Files
 
