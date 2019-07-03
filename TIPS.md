@@ -452,7 +452,100 @@ but in singly linked list it would be O(N) since we would need to find the nodes
         
      2. When we have few functions in our code, closures prove to be efficient way. But if we need to have many functions, then go for class (OOP).
 
- * Matrix Rotation Problems (Rotate 90, 180, 270, 360 degree) could be with transpose with (right-to left fli or top-bottom flip) although the order of transpose and flips could differ.
+* Matrix Rotation Problems (Rotate 90, 180, 270, 360 degree) could be with transpose with (right-to left fli or top-bottom flip) although the order of transpose and flips could differ.
+
+* Function Passes in Python:
+    * Python document refers it to as "pass by assignment"
+    * Python does pass by value. What is being passed is just a pointer to the object that you're passing. So what is being copied isn't the object, but its object address.
+
+            def f(x,y):
+                 temp = x
+                 x = y
+                 y = temp
+            # would not swap and change x or y, swaps the copy object refence of x and y
+            
+            def f(x):
+                x.append(1)
+            # would change since we are calling x with append method refering to original object
+
+* In graph theory, ***a tree*** is an undirected graph in which any two vertices are connected by exactly one path, or equivalently a connected acyclic undirected graph
+    * What this means is that a tree refers to the usual known tree reference but only this time the edges are bidirectional making the whole tree as undirected graph.
+    * "Tree" can also mean just an ***"acyclic connected graph"***.
+
+* The is operator may seem like the same as the equality operator but they are not same. The is checks if both the variables point to the same object whereas the == sign checks if the values for the two variables are the same. 
+
+* Simply speaking Serialization is a process of converting an Object into stream of bytes so that it can be transferred over a network or stored in a persistent storage.
+
+
+## Disjoint Sets      
+       
+* Disjoint sets are used for computing equivalence relations.
+Given a set S and a relation R, a R b, indicates that a is related to b with the relation R.
+
+* An equivalence relation R satisfies the following properties
+    * Reflexivity:
+        * a R a, for all a in S
+    * Symmetric:
+        * a R b if and only if b R a
+    * Transitivity:
+        * a R b and b R c implies a R c
+          
+* Keep an array of N set identifiers, one for each item. The set that an element belongs to can be found in O(1) time.
+
+* We want to have Find and Union methods, how could we make these.
+    * Keep an array of N set identifiers, one for each item. The set that an element belongs to can be found in O(1) time. 0 0 1 1 2 1 3 3 - index numbers are object ID's
+        1. Find is O(1) but Union is O(N) since union is done through iterating takes O(N). Suppose we union sets i and j.  Then we scan the array changing all j’s to i’s.
+    * Better way is use ***a forest.*** Instead of tree nodes pointing to their children, these nodes will point to their parents! Union by making the parent of one tree’s root link to the root of the other tree
+    * We represent a set of trees (a forest) implicitly using an array.
+        * s[i] = -1 if i is a root.
+        * s[i] = label of the parent if i is not a root.
+    * Union can be implemented by making the parent link of one tree’s root link to the root node of the other tree.
+        * -1 0 -1 1 0 Union 2 and 0 -> -1 0 0 1 0
+        * A thing to note, the reason of needing nodes is that if we directly union two given numbers, we would miss out the other elements in the disjoint which is not the purpose of union. 
+        All elements in both disjoint sets must be merged into one disjoint set.
+        * Union operation takes O(1) time.
+        * Find takes O(N) time. Time is proportional to the depth of the node for X.
+        Worst Case: A tree of depth N-1 can result so the worst case time is O(N).
+    * Optimize even further: 
+    * ***Union By Rank:***
+        * Rank is either height or size.
+        * Union by size: If unions are done by size, the depth of any node is never more than log N. Initially the depth of a node is 0
+        When its depth increases as the result of a union, it is placed in a tree at least twice as large as before.
+        Thus the depth can be increased at most log N times.
+            * Find becomes O(log N)
+            * S[i] is the index of the parent if i is NOT root.
+            * S[i] is –Size of the tree with root i – indicates it is a root Size keeps the number of nodes.
+                * For example: 6 3 3 -3 0 6 -4 -1
+        * ***Proof of O(logN):*** Let say we have 8 nodes N = 8. So If we start from 1 (when no nodes are connected) we double it to get 2 (first time), double it to get 4 (second time), double it to get 8=N (3rd time).
+        So it seems we can double at max 3 times or lg8 times to connect all nodes
+        Depth of a node x increases by 1 if another tree(T2) which is larger or equal to the size of tree(T1) containing x is merged. So now the size of merged tree(T12) is atleast doubled. Now if one more larger tree(T3) is merged with T12, the size is again, atleast doubled(T123) and depth of x further increases by 1.
+        * Union by height: If unions are done by height, the height of a tree increases (by 1) only when equally deep trees are unioned
+        This can only happen log N times
+            * Find becomes O(log N)
+            * S[i] is the index of the parent if i is NOT root.
+            * S[i] is –Height -1 of the tree with root i. – indicates it is a root
+            Height is the is the height of the tree rooted at i
+            -1 is necessary for trees of height
+        * Tree grows in depth by one when equal depth trees are union together otherwise depth is kept same.
+        * Proof is same intuition with union by size.
+    * ***Path COMPRESSION:***
+        Path compression is a technique for dynamically changing the data structure during a find operation. When we perform find(x), the parent of every node from x to the root is changed to root. So subsequent find operations run faster (we are speculating though!)
+    * The basic idea (and hope) behind path compression is that we do some extra work during a find, and hope that this will speed up future find operations.
+    * Union-by-Rank + Path compression leads to O(α(N)) where α(N) is ***The Inverse Ackermann Function.*** - Definition: A function of two parameters whose value grows very, very slowly. -
+         
+## Binary Search 
+
+* ***Search Space:*** In its simplest form, Binary Search operates on a contiguous sequence with a specified left and right index. This is called the Search Space.
+
+* Binary Search is generally composed of 3 main sections:
+    1. Pre-processing - Sort if collection is unsorted.
+    2. Binary Search - Using a loop or recursion to divide search space in half after each comparison.
+    3. Post-processing - Determine viable candidates in the remaining space.
+
+* Could be used to find the first occurrence of an element in a sorted array.
+
+* Three templates explained in LeetCode.
+
 ## Behavioural Part
 
 * Resume Walk-Through
