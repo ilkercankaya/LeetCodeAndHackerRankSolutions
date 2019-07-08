@@ -113,13 +113,9 @@ class MinBinaryHeap:
             lastElement = self.heap.pop()
             self.heap[indexOfKey] = lastElement
 
-            # heapify with respect to heapify down
-            """
-            proof: ONLY HEAPIFYDOWN is required. Proof: If a node at a level is swapped with the last node 
-            since the last node is greater than the current node,
-            it is guranteed that the new value is always bigger than its parent.
-            """
+            # heapify with respect to parent
             self.heapifyDown(indexOfKey)
+            self.heapifyUp(indexOfKey)
         except ValueError:
             # looking for an key that doesnt exist in the binary heap
             return

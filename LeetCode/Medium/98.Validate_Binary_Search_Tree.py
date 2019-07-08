@@ -10,8 +10,6 @@ class Solution(object):
 
         return self.isValidBST(root.left, min, root) and self.isValidBST(root.right, root, max)
 
-
-
 # Solution Two
 # class Solution(object):
 #     def __init__(self):
@@ -27,11 +25,6 @@ class Solution(object):
 #         if self.prev and self.prev.val >= root.val:
 #             return False
 #
-#         if self.prev and self.prev.val < root.val:
-#             self.prev = root
-#
-#         if not self.prev:
-#             self.prev = root
+#         self.prev = root
 #
 #         return self.isValidBST(root.right)
-#

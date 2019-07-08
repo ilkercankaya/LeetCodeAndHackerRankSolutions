@@ -1,3 +1,6 @@
+## Tips
+    I have written out key points within my journey of studying algorithms, data structures. 
+
 ## Technical Part 
 
 * Always Have Hashtable at the top of your mind
@@ -49,7 +52,9 @@
     
 
 * **[Average Case Analysis:](https://www.youtube.com/watch?v=ElhIcC4f710)** Sigma * P(i) * Cost(i). [Another Source Here](https://www.geeksforgeeks.org/analysis-of-algorithms-set-2-asymptotic-analysis/)
-    
+
+* In Python 3//2 = 1 but -3//2 = -2 due to ***the floor*** operation. Your result using integer division is being rounded down toward the more negative value of -2. (This is also known as "Floor division")
+
 * Shallow Copy vs Deep Copy: [:] Operator - Shallow [Explained Here.](https://medium.com/@thawsitt/assignment-vs-shallow-copy-vs-deep-copy-in-python-f70c2f0ebd86)  
            
             a = [1,2,3,4]
@@ -78,15 +83,6 @@
         1. Circular Queue: We may use a fixed-size array and two pointers to indicate the starting position and the ending position. And the goal is to reuse the wasted storage we mentioned previously.
     2. Stack: First in Last Out.
     
-* Trie -> reTrieval [Video Explanation Here](https://www.youtube.com/watch?v=-urNrIAQnNo)
-    1. A tree that stores strings. Used for string search such as prefix, suffix. [E.g](https://www.hackerrank.com/challenges/contacts/problem)
-    2. Can be used for word validation such as when the user is typing a word we can look up trie to see if the word is valid and maybe even suggest to complete the words.
-    3. A  well balanced BST will need time proportional to M * log N, where M is maximum string length and N is number of keys in tree. The crucial point here is that unlike a BST with numbers your comparison complexity at any node is not O(1) but instead O(m) (Since in the worst case your string at any node differs from your pattern at the last letter).
-In the worst case you'll have to compare your pattern with O(log n) nodes.
-    4. Using Trie, we can search the key in O(M) time. 
-    5. Contains a HashMap (pointer of alphabet size - use hash to map chars to indexes
-    ) and a boolean in each node. Boolean for checking if the node is a word since it could also be a prefix.
-
 * Inorder, Preorder, Postorder: Code Always Have Recursion(Left), Recursion(Right) stabled, only the print statement changes
     1. Inorder: Left First Then Root Then Right
     1. Preorder: Root First Then Left then Right 
@@ -174,53 +170,6 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
 
 * **Bubble Sort** -> until array is sorted - walk through and swap elements leading to number of times swapped - 1 4 5 7 2 3 -> 1 4 5 2 3 7 -> 1 4 2 3 5 7 -> 1 2 3 4 5 7
 
-* **Heap Sort:** [E.g.](https://www.youtube.com/watch?v=2DmK_H7IdTo&t=76s) [E.g. 2](https://www.youtube.com/watch?v=2fA1FdxNqiE)
-    1. Create max heap with given array O(N logN)
-    2. Remove the largest element
-    3. Place it in the sorted position
-    4. Space Complexity O(1) since the root is swapped with the last element before the heapify call. [E.g.](https://stackoverflow.com/questions/22233532/why-does-heap-sort-have-a-space-complexity-of-o1)
-    5. Ascending sort -> Form a Max-Heap, Descending Sort -> Form a min-heap.
-    6. Build Max Heap: Start from non last leafs (len(A) // 2 - 1 for 0 index) and call heapify down, NOT HEAPIFY UP, this is because build max heap traverses from last non leaf node and keeps making the subtrees a heap, if heapify up was called it would mess the subtrees with the elements coming from up. [E.g.](https://www.youtube.com/watch?v=HI97KDV23Ig)
-        1. O(N) times, [Time Complexity proof Here!](https://www.geeksforgeeks.org/time-complexity-of-building-a-heap/)
-        2. Sum of Geometric Series [Explained Here!](https://www.youtube.com/watch?v=-5kIBPR2Npk)
-
-* **Quicksort (Also known as Partition Sort):**
-    1. Pivot: All the elements smallers than pivot should be on left and all the elements greater than pivot should be on right.
-    2. The process of making the list in 1. is called partitioning
-    3. Partitioning only ensures that the pilot is placed in the correct position of the array. The left and right sub-arrays are arranged randomly.
-    4. After partitioning the problem is broke down into 2 sub problems, sort the array on the left and the right.
-    5. Divide and Conquer.
-    6. Not a stable algorithm.
-    7. Space complexity O(log(N)) due to stack frames. (2 calls from the middle of the array adds up to 2*logN but it is O(logN))
-    8. Naive Approach Space complexity O(N) due to stack frames. Pivot is always chosen as the smallest element leading to N stack calls to partitioning.
-    9. [Space complexity reduce method.](https://www.geeksforgeeks.org/quicksort-tail-call-optimization-reducing-worst-case-space-log-n/amp/) After partitioning, the partition with the fewest elements is (recursively) sorted first, requiring at most O(log n) space. Then the other partition is sorted using tail recursion or iteration, which doesn't add to the call stack. This idea, as discussed above, was described by R. Sedgewick, and keeps the stack depth bounded by O(log n).
-    10. [Check Method II For Complete Explanation Space Complexity.](http://www.cs.nthu.edu.tw/~wkhon/algo08-tutorials/tutorial2b.pdf) if (there is X with length(X) < n/2) call Qsort(X) else partition X into X’and X’’ until all X are processed
-        1. The idea of Method II is tail recursion
-        2. Call recursion only when sub-problem is small enough (N/2)
-        3. Only doing recursion when a sub-array with (N/2) is there makes sure that O(log n) is met.
-        4. First solves sub-problem with smaller size
-    11. Average and Best Running time of O(N logN) due to logN times (best pivot picking) partitioning (which has O(N) time complexity).
-    12. Worst case of O(N^2) due to picking the smallest as the pivot leads to N calls to partitioning (which has O(N) time complexity).
-    13. This is a tail recursive algorithm.
-    14. Median Of Three: Pick 3 elements chosen as first, middle, last, then sort them in the original array and use the median as the pivot. Eliminates the problem with (almost) sorted input. Compared to picking the pivot randomly:
-        1. It ensures that one common case (fully sorted data) remains optimal.
-        2. It's more difficult to manipulate into giving the worst case.
-        3. A PRNG is often relatively slow.
-    15. Pick a pivot and put that at the last index to run the partitioning algo.
-    16. Pick i = 0, j = last element before pivot and iterate until i meets an element that is greater than the pivot and j meets an element that is smaller than the pivot. Swap these elements and keep on iterating until i and j have crossed. Swap the element at i with the pivot.
-        1. Should i and j stop when they see elements equal to the pivot? Intuitively They should do the same thing, otherwise they will cause an imbalance. 
-        2. For instance if i stops and j does not stop all elements equal to the pivot end up in S2
-        3. If i and j both stop when they see elements equal to the pivot, there will be many swaps between identical elements. Although this seems useless, the positive effect is that i and j will cross in the middle, so the partition creates (nearly)  equal sized partitions.
-        4. Consequently, if i and j do NOT stop, this would create very uneven partitions. (similar to choosing the first element!)
-     17. **Partition Algorithms**:   
-        1. **Hoare-Partition:** Uses i = start and j = end and iterates until a bigger or equal element than pivot is found on the ith index, smaller or equal than pivot element is found at jth index. Swaps them in-between. Repeats until i < j.  
-        2. **Lomuto-Partition:** Init pIndex = start, iterate from start to end -1 and check if an element is smaller then the pivot, if so change the elements at i and pIndex and increment pIndex. Idea is to push all the elements that are less than pivot to the left. Lastly swap the pivot and the element at pIndex.
-        3. Hoare-Partition is faster than Lomuto-Partition but Lomuto is easier to understand and implement.
-     18. **In-place or not:** Yes it is. In-place means that the algorithm does not use extra space for manipulating the input but may require a small though nonconstant extra space for its operation. Usually, this space is O(log n), though sometimes anything in o(n) (Smaller than linear) is allowed.
-     
-* **Quick Select:** Use the idea of partitioning recursively to find the kth smallest element. This makes one recursive call instead of two as in Naive Quicksort. Average O(N) time complexity, worst O(N^2). Use a good pivot to avoid worst.
-    1. T(n) = cn + T(n/2)
-    2. c(n + n/2 + n/4 + ... + 2 + 1) = c(2n) = O(n) 
 
 * **Head vs Tail Recursion:**
     1. **(Non-Tail-Recursive) Head Recursion**: You make a recursive call first then do the calculation once the call is back. This method is prone to stack overflow if we exceed the stack limit.
@@ -266,26 +215,7 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
 * **In-place vs out-of-place**:
     1. In-place In-place means that the algorithm does not use extra space for manipulating the input but may require a small though nonconstant extra space for its operation. Usually, this space is O(log n), though sometimes anything in o(n) (Smaller than linear) is allowed. For array of 1073741824 size it is only taking 30 units of space.
     2. Out-of-place means that the algorithm is NOT in-place so according to the definition above it is considered any space usage greater than O(log n).
-    
-***Priority Queue**: A priority queue is an abstract data type which is like a regular queue or stack data structure, but where additionally each element has a "priority" associated with it. In a priority queue, an element with high priority is served before an element with low priority.
-
-* **Heap**: A Heap is a special Tree-based data structure in which the tree is a complete binary tree. An array is used to store the nodes with level order. Generally, Heaps can be of two types:
-    1. **Min-Heap**: In a Min-Heap the key present at the root node must be minimum among the keys present at all of it’s children. The same property must be recursively true for all sub-trees in that Binary Tree.
-    2. **Max-Heap**: In a Max-Heap the key present at the root node must be greatest among the keys present at all of it’s children. The same property must be recursively true for all sub-trees in that Binary Tree.
-    3. Insertion as breadth-depth therefore it always has a height of LogN. Uses bubble'ing to interchange an newly added element to top.
-    4. **Insertion - Bubbling E.g. Min Heap**: Check the parent, if it is greater than our node swap them.
-    5. **Removing**: If root is removed then we have an empty spot. Swap that empty with the last added element. Bubble down the new root. Compare the root with its both children and swap it with the smallest child.
-    6. **Removing wrt. Key**: Find the node with O(N) search and delete the node and swap the last node with the deleted current. After that ONLY HEAPIFYDOWN from that node is required. Proof: If a node at a level is swapped with the last node since the last node is greater than the current node, it is guranteed that the new value is always bigger than its parent. However, it is not guaranteed that the value is the smallest wrt. all children.
-    7. **Indexing**: Parent = index is current index; parent = (index - 1) / 2, left = index * 2 + 1, right = index * 2 + 2
-    8. **Heapify up - bubble up**: When we switch the current node with the root since the root was smaller than the other node, the swapped node it guaranteed to be smaller than the other child node.
-    9. **Heapify down - bubble down**: We switch the current node with the smallest of the children since the smallest node must be the root.
-    10. **Advantages**: Useful for accessing the smallest node in O(1) time, schedulers (where the earliest item is desired), find the kth smallest value O(k * logN) {logN due to heapify after deleting root}, median finder.
-    11. O(N logN) to build the heap since we make insert calls with each element that could lead to heapify up.
-    12. But if the array is given initially it is O(N) due to the heapify call for the each subtrees starting from non leaves.
-    13. Find the largest kth number is find the smallest n-k th number in min heap.
-    
-* Priority Queue vs Heap: A heap is an implementation of priority queue with BST's. A normal Priority Queue can have O(N) add time where as a heap has O(logN) add.
-
+  
 * **Dangling pointers:** Pointer which points to a de-allocated memory. Happens generally when two pointers are pointing towards the same memory address. Could lead to crashes.
 
 * **Space complexity of a recursive function:** Look at the recursion tree and try to capture a moment where the recursion call stack is at its max. Iterate from beginning to end if your are having bad time. Just because the recursive calls are high does not mean that the space complexity will be high.
@@ -476,7 +406,113 @@ but in singly linked list it would be O(N) since we would need to find the nodes
 
 * Simply speaking Serialization is a process of converting an Object into stream of bytes so that it can be transferred over a network or stored in a persistent storage.
 
+## Heap - Priority Queue
+  
+***Priority Queue**: A priority queue is an abstract data type which is like a regular queue or stack data structure, but where additionally each element has a "priority" associated with it. In a priority queue, an element with high priority is served before an element with low priority.
 
+* **Heap**: A Heap is a special Tree-based data structure in which the tree is a complete binary tree. An array is used to store the nodes with level order. Generally, Heaps can be of two types:
+    1. **Min-Heap**: In a Min-Heap the key present at the root node must be minimum among the keys present at all of it’s children. The same property must be recursively true for all sub-trees in that Binary Tree.
+    2. **Max-Heap**: In a Max-Heap the key present at the root node must be greatest among the keys present at all of it’s children. The same property must be recursively true for all sub-trees in that Binary Tree.
+    3. Insertion as breadth-depth therefore it always has a height of LogN. Uses bubble'ing to interchange an newly added element to top.
+    4. **Insertion - Bubbling E.g. Min Heap**: Check the parent, if it is greater than our node swap them.
+    5. **Removing** [Eg Here](http://www.mathcs.emory.edu/~cheung/Courses/171/Syllabus/9-BinTree/heap-delete.html): If root is removed then we have an empty spot. Swap that empty with the last added element. Bubble down the new root. Compare the root with its both children and swap it with the smallest child.
+    6. **Removing wrt. Key**: Find the node with O(N) search and delete the node and swap the last node with the deleted current. After that HEAPIFYDOWN or HEAPIFYUP from that node is required. 
+    7. **Indexing**: Parent = index is current index; parent = (index - 1) / 2, left = index * 2 + 1, right = index * 2 + 2
+    8. **Heapify up - bubble up**: When we switch the current node with the root since the root was smaller than the other node, the swapped node it guaranteed to be smaller than the other child node.
+    9. **Heapify down - bubble down**: We switch the current node with the smallest of the children since the smallest node must be the root.
+    10. **Advantages**: Useful for accessing the smallest node in O(1) time, schedulers (where the earliest item is desired), find the kth smallest value O(k * logN + N) {logN due to heapify after deleting root, N due to heapify}, median finder.
+    11. O(N logN) to build the heap since we make insert calls with each element that could lead to heapify up.
+    12. But if the array is given initially it is O(N) due to the heapify call for the each subtrees starting from non leaves.
+    13. Find the largest kth number is find the smallest n-k th number in min heap.
+   
+* Priority Queue vs Heap: A heap is an implementation of priority queue with BT's. A normal Priority Queue can have O(N) add time where as a heap has O(logN) add.
+
+* Do not confuse keeping the max through iterations with heaps. Keeping the max could be done without having to make a heap by just iteratively comparing the obtained value with the current one.
+
+## Heapsort
+
+* **Heap Sort:** [E.g.](https://www.youtube.com/watch?v=2DmK_H7IdTo&t=76s) [E.g. 2](https://www.youtube.com/watch?v=2fA1FdxNqiE)
+    1. Create max heap with given array O(N)
+    2. Remove the largest element
+    3. Place it in the sorted position
+    4. Space Complexity O(1) since the root is swapped with the last element before the heapify call. [E.g.](https://stackoverflow.com/questions/22233532/why-does-heap-sort-have-a-space-complexity-of-o1)
+    5. Ascending sort -> Form a Max-Heap, Descending Sort -> Form a min-heap.
+    6. Build Max Heap: Start from non last leafs (len(A) // 2 - 1 for 0 index) and call heapify down, NOT HEAPIFY UP, this is because build max heap traverses from last non leaf node and keeps making the subtrees a heap, if heapify up was called it would mess the subtrees with the elements coming from up. [E.g.](https://www.youtube.com/watch?v=HI97KDV23Ig)
+        1. O(N) times, [Time Complexity proof Here!](https://www.geeksforgeeks.org/time-complexity-of-building-a-heap/)
+        2. Sum of Geometric Series [Explained Here!](https://www.youtube.com/watch?v=-5kIBPR2Npk)
+
+## Quicksort + Quickselect
+
+* **Quicksort (Also known as Partition Sort):**
+    1. Pivot: All the elements smallers than pivot should be on left and all the elements greater than pivot should be on right.
+    2. The process of making the list in 1. is called partitioning
+    3. Partitioning only ensures that the pilot is placed in the correct position of the array. The left and right sub-arrays are arranged randomly.
+    4. After partitioning the problem is broke down into 2 sub problems, sort the array on the left and the right.
+    5. Divide and Conquer.
+    6. Not a stable algorithm.
+    7. Space complexity O(log(N)) due to stack frames. (2 calls from the middle of the array adds up to 2*logN but it is O(logN))
+    8. Naive Approach Space complexity O(N) due to stack frames. Pivot is always chosen as the smallest element leading to N stack calls to partitioning.
+    9. [Space complexity reduce method.](https://www.geeksforgeeks.org/quicksort-tail-call-optimization-reducing-worst-case-space-log-n/amp/) After partitioning, the partition with the fewest elements is (recursively) sorted first, requiring at most O(log n) space. Then the other partition is sorted using tail recursion or iteration, which doesn't add to the call stack. This idea, as discussed above, was described by R. Sedgewick, and keeps the stack depth bounded by O(log n).
+    10. [Check Method II For Complete Explanation Space Complexity.](http://www.cs.nthu.edu.tw/~wkhon/algo08-tutorials/tutorial2b.pdf) if (there is X with length(X) < n/2) call Qsort(X) else partition X into X’and X’’ until all X are processed
+        1. The idea of Method II is tail recursion
+        2. Call recursion only when sub-problem is small enough (N/2)
+        3. Only doing recursion when a sub-array with (N/2) is there makes sure that O(log n) is met.
+        4. First solves sub-problem with smaller size
+    11. Average and Best Running time of O(N logN) due to logN times (best pivot picking) partitioning (which has O(N) time complexity).
+    12. Worst case of O(N^2) due to picking the smallest as the pivot leads to N calls to partitioning (which has O(N) time complexity).
+    13. This is a tail recursive algorithm.
+    14. Median Of Three: Pick 3 elements chosen as first, middle, last, then sort them in the original array and use the median as the pivot. Eliminates the problem with (almost) sorted input. Compared to picking the pivot randomly:
+        1. It ensures that one common case (fully sorted data) remains optimal.
+        2. It's more difficult to manipulate into giving the worst case.
+        3. A PRNG is often relatively slow.
+    15. Pick a pivot and put that at the last index to run the partitioning algo.
+    16. Pick i = 0, j = last element before pivot and iterate until i meets an element that is greater than the pivot and j meets an element that is smaller than the pivot. Swap these elements and keep on iterating until i and j have crossed. Swap the element at i with the pivot.
+        1. Should i and j stop when they see elements equal to the pivot? Intuitively They should do the same thing, otherwise they will cause an imbalance. 
+        2. For instance if i stops and j does not stop all elements equal to the pivot end up in S2
+        3. If i and j both stop when they see elements equal to the pivot, there will be many swaps between identical elements. Although this seems useless, the positive effect is that i and j will cross in the middle, so the partition creates (nearly)  equal sized partitions.
+        4. Consequently, if i and j do NOT stop, this would create very uneven partitions. (similar to choosing the first element!)
+     17. **Partition Algorithms**:   
+        1. **Hoare-Partition:** Uses i = start and j = end and iterates until a bigger or equal element than pivot is found on the ith index, smaller or equal than pivot element is found at jth index. Swaps them in-between. Repeats until i < j.  
+        2. **Lomuto-Partition:** Init pIndex = start, iterate from start to end -1 and check if an element is smaller then the pivot, if so change the elements at i and pIndex and increment pIndex. Idea is to push all the elements that are less than pivot to the left. Lastly swap the pivot and the element at pIndex.
+        3. Hoare-Partition is faster than Lomuto-Partition but Lomuto is easier to understand and implement.
+     18. **In-place or not:** Yes it is. In-place means that the algorithm does not use extra space for manipulating the input but may require a small though nonconstant extra space for its operation. Usually, this space is O(log n), though sometimes anything in o(n) (Smaller than linear) is allowed.
+     
+* **Quick Select:** Use the idea of partitioning recursively to find the kth smallest element. This makes one recursive call instead of two as in Naive Quicksort. Average O(N) time complexity, worst O(N^2). Use a good pivot to avoid worst.
+    1. T(n) = cn + T(n/2)
+    2. c(n + n/2 + n/4 + ... + 2 + 1) = c(2n) = O(n) 
+    
+## Hashtable And HashSet
+
+* Hash Table is a data structure which organizes data using hash functions in order to support quick insertion and search.
+
+* There are two different kinds of hash tables: hash set and hash map.
+
+    1. The hash set is one of the implementations of a set data structure to store no repeated values.
+    2. The hash map is one of the implementations of a map data structure to store (key, value) pairs.
+
+* The hash function is the most important component of a hash table which is used to map the key to a specific bucket.  Ideally, a perfect hash function will be a one-one mapping between the key and the bucket. However, in most cases a hash function is not perfect and it is a tradeoff between the amount of buckets and the capacity of a bucket.
+
+* Let's assume that the bucket, which holds the maximum number of keys, has N keys.
+Typically, if N is constant and small, we can simply use an array to store keys in the same bucket. If N is variable or large, we might need to use height-balanced binary search tree instead.
+
+* For some uses of hash tables, it's impossible to create them of the "right" size in advance, because it is not known how many elements will need to be held simultaneously during the lifetime of the table. If you want to keep fast access, you need to resize the table from time to time as the number of element grows. This resizing takes linear time with respect to the number of elements already in the table, and is usually done on an insertion, when the number elements passes a threshold.
+These resizing operations can be made seldom enough that the amortized cost of insertion is still constant (by following a geometric progression for the size of the table, for instance doubling the size each time it is resized). But one insertion from time to time takes O(n) time because it triggers a resize.
+
+* ***The load factor*** is the number of keys stored in the hash table divided by the capacity.
+ 
+* The average time complexity of both insertion and search is still O(1). And the time complexity in the worst case is O(logN) for both insertion and search by using height-balanced BST. It is a trade-off between insertion and search.
+
+* Duplicates are used to find with HashSet, and any problem relating to duplicates could maybe be solved with a hashSet.
+ 
+* Checking if a key exists in a hashMap is O(1) due to hash function.
+
+* ***Design The Key:***
+    1. The choice of key is comparatively straightforward. Unfortunately, sometimes you have to think it over to design a suitable key when using a hash table.
+    2. Actually, designing a key is to build a mapping relationship by yourself between the original information and the actual key used by hash map. When you design a key, you need to guarantee that
+        1. All values belong to the same group will be mapped in the same group.
+        2. Values which needed to be separated into different groups will not be mapped into the same group.
+    3. This process is similar to design a hash function, but here is an essential difference. A hash function satisfies the first rule but might not satisfy the second one. But your mapping function should satisfy both of them.
+    
 ## Disjoint Sets      
        
 * Disjoint sets are used for computing equivalence relations.
@@ -546,6 +582,124 @@ Given a set S and a relation R, a R b, indicates that a is related to b with the
 
 * Three templates explained in LeetCode.
 
+## N-ary Tree
+
+* In graph theory, an m-ary tree is a rooted tree in which each node has no more than m children. A binary tree is the special case where m = 2, and a ternary tree is another case with m = 3 that limits its children to three.
+
+* Trie is one of the most frequently used N-ary trees.
+
+## Trie
+
+* Trie, also called prefix tree, is a special form of a Nary tree.
+
+* A Trie is a special form of a Nary tree. Typically, a trie is used to store strings. Each Trie node represents a string (a prefix). 
+
+* Trie -> reTrieval [Video Explanation Here](https://www.youtube.com/watch?v=-urNrIAQnNo)
+    1. A tree that stores strings. Used for string search such as prefix, suffix. [E.g](https://www.hackerrank.com/challenges/contacts/problem)
+    2. Can be used for word validation such as when the user is typing a word we can look up trie to see if the word is valid and maybe even suggest to complete the words.
+    3. A  well balanced BST will need time proportional to M * log N, where M is maximum string length and N is number of keys in tree. The crucial point here is that unlike a BST with numbers your comparison complexity at any node is not O(1) but instead O(m) (Since in the worst case your string at any node differs from your pattern at the last letter).
+In the worst case you'll have to compare your pattern with O(log n) nodes.
+    4. Using Trie, we can search the key in O(M) time. 
+    5. Contains a HashMap (pointer of alphabet size - use hash to map chars to indexes    ) and a boolean in each node. Boolean for checking if the node is a word since it could also be a prefix.
+
+* One important property of Trie is that all the descendants of a node have a common prefix of the string associated with that node. That's why Trie is also called prefix tree.
+
+* Trie is widely used in various applications, such as autocomplete, spell checker, etc.
+
+* First Solution - Array    
+    1 .The first solution is to use an array to store children nodes.
+    2. For instance, if we store strings which only contains letter a to z, we can declare an array whose size is 26 in each node to store its children nodes. And for a specific character c, we can use c - 'a' as the index to find the corresponding child node in the array.
+    3. It is really fast to visit a child node. It is comparatively easy to visit a specific child since we can easily transfer a character to an index in most cases. But not all children nodes are needed. So there might be some waste of space.
+    
+* Second Solution - Map
+    1. The second solution is to use a hashmap to store children nodes.
+    2. We can declare a hashmap in each node. The key of the hashmap are characters and the value is the corresponding child node.
+    3. It is even easier to visit a specific child directly by the corresponding character. But it might be a little slower than using an array. However, it saves some space since we only store the children nodes we need. It is also more flexible because we are not limited by a fixed length and fixed range.
+
+* For example, as we know, each Trie node represents a string but not all the strings represented by Trie nodes are meaningful. If we only want to store words in a Trie, we might declare a boolean in each node as a flag to indicate if the string represented by this node is a word or not.
+
+##Graph Theory
+
+* ***A graph G= (V, E)*** consists of
+    1. A set of ***vertices*** (sometimes referred as Node), V, and
+    2. A set of ***edges***, E.
+
+* Each edge is a pair (v,w) where v and w are vertices.  Edges are sometimes referred to as arcs.
+
+* If the pair of vertices in an edge is ordered, then the graph is a directed graph (digraph).
+
+* In an undirected graph with an edge (v,w), v is adjacent to w and w is adjacent to v.
+
+* Sometimes an edge has a third component (v,w,weight).
+
+* ***A path*** in a graph is a sequence of vertices w1,w2,w3,...wN such that (wi,wi+1) in E.
+
+* The length of a path is the number of edges on a path (= N-1)
+
+* ***A simple path*** is a path in a graph which does not have repeating vertices.
+
+* ***A cycle*** in a directed graph is a path of length at least 1 such that w1= wN
+
+* A directed graph with no cycles is called ***a directed acyclic graph (DAG)***
+
+* An ***undirected graph*** is ***connected*** if there is a path from every vertex to every other vertex.
+
+* A ***directed graph*** is ***strongly connected*** if there is a path from _u to w_ and _w to u_ for all vertices.
+
+* ***A complete graph*** is a graph in which each pair of graph vertices is connected by an edge.
+    1. In undirected graphs each vertex has n-1 edges
+    2. In directed graph each vertex has 2 * (n-1) edges, in and out.
+
+* ***Degree of a vertex (undirected graphs)***
+    1. Number of edges incident on the vertex.
+
+* ***In-degree of a vertex (digraphs)***
+    1. Number of edges coming to a vertex
+
+*   ***Out-degree of a vertex (digraphs)***
+    1. Number of edges going from a vertex
+
+* We can represent graphs by using a number of different representations:
+    1. **Adjacency Matrix representation:**
+        1. We use a 2-dimensional array of boolean values.
+        2. A[i][j] = true(1) if (i,j)in E, 0 otherwise. 
+        3. A[i][j] = weight if (i,j) in E, float("inf") otherwise. 
+        4. The adjacency matrix representation uses O(|V|2) space.
+        5. You can easily check if an edge exists or not in O(1) time.
+        6. If the graph is sparse, the matrix will have a large number of 0 elements: 
+            1. too much wasted space.
+            2. We are allocating memory to represent data that is actually not there. (Not good!)
+        7. Adjacency matrix representation is very easy to implement.
+
+    2. **Adjacency List representation:**
+        1. If the graph is sparse, a better (spacewise) alternative is the adjacency list representation.
+        For each vertex we keep a list of the edges emanating from that vertex.
+        For undirected graphs, we only need to keep the edge once.
+        2. Total memory for adjacency lists is O(|E|)
+        3. Total memory for array of pointers is O(|V|)
+        4. Total memory for adjacency list representation is O(|V|+|E|) which is linear in the size of the graph.
+        5. If the edges have weights they can be stored in the list elements.
+        6. The vertices may have labels which are not integers
+            1. Use a hash table to map names to integers.
+            2. Use these integers to access the adjacency list vector.
+        7. For undirected graphs we only keep the edges (v, w) where v < w.
+            1. To see if an edge (v, w) exists where v > w, we look up to see if (w,v) exists.
+        8. Adjacency list representation is exactly the same data structure for hash tables with separate chaining.
+
+* We define the density of a graph G as D=|E| / M, where M is the maximum number of possible edges in G.
+    1. For undirected graphs, there can be at most M=|V|(|V|-1)/2 edges.
+    2. For digraphs, there can be at most M=|V|(|V|-1) edges.
+    3. If D is close to 1 then it is dense, if it is close to 0 then it is sparse.
+    
+* **Topological sort:**
+    1. Topological sort is an ordering of vertices in a directed acyclic graph.
+    2. If there is a path from vi to vj then vj appears after vi in the ordering.
+    3. How It Works:
+        1. Select vertex with in-degree 0 or 
+        1. Print it out
+        1. Remove it
+        1. Repeat
+        
 ## Behavioural Part
 
 * Resume Walk-Through
@@ -558,8 +712,6 @@ Given a set S and a relation R, a R b, indicates that a is related to b with the
 
 * Describe weaknesses, dont cover them
 
-* Mention Hobbies -> HackerRank + Hackathons + Online Courses
-
 ## 3 Ways To Approach An Algorithm 
 
  1. **BUD**
@@ -570,6 +722,7 @@ Given a set S and a relation R, a R b, indicates that a is related to b with the
  2. **Space / Time Tradeoffs (Hash Tables)**
  
  3. **D.I.Y:** Solve the algorithm my your brain and copy that algorithm to your code.
+
 ## Solve Algorithms in 7 Steps
 
 1. LISTEN THE QUESTION - ASK FOR CLARIFICATION IF NEEDED
