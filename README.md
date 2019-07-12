@@ -27,3 +27,5 @@ Data Structures, Mathematics_ Problems in HackerRank.
 `Easy But Not Easy:` Contains solutions to problems which i do not truly believe are 'Easy'.
 
 `Training:` Important algorithms written from scratch.
+
+`TIPS.md:` I have written out key points within my journey of studying algorithms and data structures. 
