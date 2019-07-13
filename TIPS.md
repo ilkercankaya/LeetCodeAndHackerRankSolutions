@@ -118,15 +118,44 @@
 * Sorting algorithms always have avg run time as worst cases except: **Quick Sort, Bucket Sort**
 
 * **Insertion sort**:
-    1. O(N^2) worst case, O(N) best; [E.g:](https://www.youtube.com/watch?v=JU767SDMDvA)
-    2. Keep a sorted, unsorted list.
-   
+    1. **O(N^2) worst case, O(N) best**; [E.g:](https://www.youtube.com/watch?v=JU767SDMDvA)
+    2. Iterate through left to right. Swap the current element to its left until it is in correct position then continue from the next index of the swapped elements original position.
+    3. Builds a sorted list from left to right in each iteration.
+    3. Gives good performance when the list is almost sorted.
+    4. Worst case time complexity of insertion sort where position of the data to be inserted is calculated using binary search
+    does not change the time complexity. Applying binary search to calculate the position of 
+    the data to be inserted doesn't reduce the time complexity of insertion sort. 
+    This is because insertion of a data at an appropriate position involves two steps: 1. Calculate the position. 2. Shift the data from the position calculated in step #1 one step right to create a gap where the data will be inserted. 
+    Using binary search reduces the time complexity in step #1 from O(N) to O(logN). But, the time complexity in step #2 still remains O(N). So, overall complexity remains O(N^2).
+    5. **Best: O(N), Worst: O(N^2)**
+    
 * **Selection sort**: 
-    1. O(N^2) worst case, O(N^2) best; [E.g:](https://www.youtube.com/watch?v=g-PGLbMth_g)
-    2. Find minimum from unsorted partition by iterating with minimum-finder algo with O(N), move it to sorted partition.
+    1. **O(N^2) worst case, O(N^2)** best; [E.g:](https://www.youtube.com/watch?v=g-PGLbMth_g)
+    2. Find minimum from unsorted partition by iterating with minimum-finder algorithm with O(N), move it to sorted partition.
     3. Worst sorting algorithm.
 
-* **Bubble Sort** -> until array is sorted - walk through and swap elements leading to number of times swapped - 1 4 5 7 2 3 -> 1 4 5 2 3 7 -> 1 4 2 3 5 7 -> 1 2 3 4 5 7
+* **Bubble Sort:** 
+    1. 1 4 5 7 2 3 -> 1 4 5 2 3 7 -> 1 4 2 3 5 7 -> 1 2 3 4 5 7
+    2. Walk through the WHOLE array from left to right N times and swap the elements adjacent to each other on the iteration index.
+    3. Takes the greatest element to the end of the array. Shortens the search range by one in each iteration.
+    4. Could be optimised to break the loop if no elements are swapped during an iteration.
+    5. **Best: O(N), Worst: O(N^2)**
+
+
+* **Merge Sort:**
+    1. Divide And Conquer.
+    2. Split the array until arrays with one elements are met.
+    3. Examine the elements are store them back to temporary arrays.
+    4. Merge smaller sorted arrays into bigger arrays making the bigger arrays sorted.
+    5. **Merge:**
+        1. Requires two _**sorted**_ arrays.
+        2. Set i = 0, j = 0, a = 0. Iterate through sorted arrays by comparing their current indexes. Find the smaller element and add it to the bigger element and increment either i or j depending on where the element is picked from.
+        3. After the iterations finish there will be an only one array which its elements are not added since the comparing while loop checks for whether the size of each the arrays are met
+        . Use two while loops to add all of the left small arrays elements into the bigger array.
+        4. Time complexity O(m+ n). 
+    6. Space complexity O(n). .If stack frames is counted, then it's O(n)+ O(log n). [Explained here. ](https://www.youtube.com/watch?v=0nlPxaC2lTw&t=602s)Not an in-place algorithm. Naive version O(n logn) due to keeping all the arrays without deletion leads to n memory allocation in each level and since we are doing a total of log n allocations the complexity is O(n logn). If we delete the unused arrays we will have at most n (the left sub array and right subarray )+ right subbarays childs n / 2 + n / 4 + n/ 8... which is O(2n) which is O(n).
+    7. Stable sorting algorithm since making "L <= R" ensures that both array have the original order reserved since we favor the left side before right side. E.g 1 2 2 2 3 => Left, 2 2 2 4 5 => Right. If we favor right over left, the order will be changed since the original array is 1 2 2 2 3 2 2 2 4 5.
+    8. Time complexity O(n logn). Merge is O(m + n) = O(n) since m = n = n / 2, for loops are total of O(0 to middle) + O(middle to len(array)) = O(n). 
 
 
 * **Head vs Tail Recursion:**
@@ -146,22 +175,6 @@
     6. Another advantage about tail recursion is that often times it is easier to read and understand, compared to non-tail-recursion. Because there is no post-call dependency in tail recursion (i.e. the recursive call is the final action in the function), unlike non-tail-recursion. 
 
 * **Call Stack:** A call stack is a stack data structure that stores information about the active subroutines of a computer program. This kind of stack is also known as an execution stack, program stack, control stack, run-time stack, or machine stack, and is often shortened to just "the stack". [E.g.](https://www.youtube.com/watch?v=Q2sFmqvpBe0)
-
-* **Merge Sort:**
-    1. Divide And Conquer.
-    2. Split the array until arrays with one elements are met.
-    3. Examine the elements are store them back to temporary arrays.
-    4. Merge smaller sorted arrays into bigger arrays making the bigger arrays sorted.
-    5. **Merge:**
-        1. Requires two _**sorted**_ arrays.
-        2. Set i = 0, j = 0, a = 0. Iterate through sorted arrays by comparing their current indexes. Find the smaller element and add it to the bigger element and increment either i or j depending on where the element is picked from.
-        3. After the iterations finish there will be an only one array which its elements are not added since the comparing while loop checks for whether the size of each the arrays are met
-        . Use two while loops to add all of the left small arrays elements into the bigger array.
-        4. Time complexity O(m+ n). 
-    6. Space complexity O(n). .If stack frames is counted, then it's O(n)+ O(log n). [Explained here. ](https://www.youtube.com/watch?v=0nlPxaC2lTw&t=602s)Not an in-place algorithm. Naive version O(n logn) due to keeping all the arrays without deletion leads to n memory allocation in each level and since we are doing a total of log n allocations the complexity is O(n logn). If we delete the unused arrays we will have at most n (the left sub array and right subarray )+ right subbarays childs n / 2 + n / 4 + n/ 8... which is O(2n) which is O(n).
-    7. Stable sorting algorithm since making "L <= R" ensures that both array have the original order reserved since we favor the left side before right side. E.g 1 2 2 2 3 => Left, 2 2 2 4 5 => Right. If we favor right over left, the order will be changed since the original array is 1 2 2 2 3 2 2 2 4 5.
-    8. Time complexity O(n logn). Merge is O(m + n) = O(n) since m = n = n / 2, for loops are total of O(0 to middle) + O(middle to len(array)) = O(n). 
-
 
 * A _stable_ sorting algorithm is said to be if two objects with equal keys appear in the same order in sorted output as they appear in the input unsorted array. Some sorting algorithms are stable by nature like Insertion sort, Merge Sort, Bubble Sort, Count Sort. And some sorting algorithms are not, like Heap Sort, Quick Sort, etc.
 
