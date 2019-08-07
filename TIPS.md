@@ -1,5 +1,5 @@
 ## Tips
-    I have written out key points within my journey of studying algorithms, data structures. 
+    I have taken notes of key points within my journey of studying algorithms, data structures. 
 
 ## Technical Part 
 
@@ -15,7 +15,7 @@
 
 * Find Max Element Unsorted -> O(N) Comparision Algorithm
 
-* Finding All Subsets -> O(2^n)
+* Finding All Subsets -> O(2^n) - Each element can either appear or not giving two options leading to 2^N.
 
 * Finding All Permutations -> O(N!)
 
@@ -27,12 +27,51 @@
 
 * BST + Sorted -> Insert = O(log N), find O(log N)
 
-* Prefix -> A prefix of a string S is a substring of S that occurs at the beginning of S. "banana" -> "b", "ba", "ban"
 
-* Suffix -> A suffix of a string S is a substring that occurs at the end of S. "banana" -> "a", "na", "ana"
+* **Queue vs. Stack**:
+    1. Queue: FIFO (First in First Out). The insert operation is also called **enqueue** and the new element is always added at the end of the queue. The delete operation is called **dequeue**. You are only allowed to remove the first element. To implement a queue, we may use a dynamic structure such as a vector or a linked list.
+        1. Circular Queue: We may use a fixed-size array and two pointers to indicate the starting position and the ending position. And the goal is to reuse the wasted storage we mentioned previously.
+    2. Stack: First in Last Out.
 
-* Balanced Tree Assumption On Interviews
+* **Call Stack:** A call stack is a stack data structure that stores information about the active subroutines of a computer program. This kind of stack is also known as an execution stack, program stack, control stack, run-time stack, or machine stack, and is often shortened to just "the stack". [E.g.](https://www.youtube.com/watch?v=Q2sFmqvpBe0)
 
+* A _stable_ sorting algorithm is said to be if two objects with equal keys appear in the same order in sorted output as they appear in the input unsorted array. Some sorting algorithms are stable by nature like Insertion sort, Merge Sort, Bubble Sort, Count Sort. And some sorting algorithms are not, like Heap Sort, Quick Sort, etc.
+
+* **In-place vs out-of-place**:
+    1. In-place In-place means that the algorithm does not use extra space for manipulating the input but may require a small though nonconstant extra space for its operation. Usually, this space is O(log n), though sometimes anything in o(n) (Smaller than linear) is allowed. For array of 1073741824 size it is only taking 30 units of space.
+    2. Out-of-place means that the algorithm is NOT in-place so according to the definition above it is considered any space usage greater than O(log n).
+  
+* **Dangling pointers:** Pointer which points to a de-allocated memory. Happens generally when two pointers are pointing towards the same memory address. Could lead to crashes.
+
+* **Space complexity of a recursive function:** Look at the recursion tree and try to capture a moment where the recursion call stack is at its max. Iterate from beginning to end if your are having bad time. Just because the recursive calls are high does not mean that the space complexity will be high.
+
+* **Stack Memory vs Heap Memory**:
+    1. Stack Memory: Variables allocated on the stack are stored directly to the memory and access to this memory is very fast, and it's allocation is dealt with when the program is **compiled**. When a function or a method calls another function which in turns calls another function etc., the execution of all those functions remains suspended until the very last function returns its value. The stack is always reserved in a LIFO order, the most recently reserved block is always the next block to be freed. This makes it really simple to keep track of the stack, freeing a block from the stack is nothing more than adjusting one pointer.
+
+    2. Variables allocated on the heap have their memory allocated at run time and accessing this memory is a bit slower, but the heap size is only limited by the size of virtual memory . Element of the heap have no dependencies with each other and can always be accessed randomly at any time. You can allocate a block at any time and free it at any time. This makes it much more complex to keep track of which parts of the heap are allocated or free at any given time.
+    
+    3. You can use the stack if you know exactly how much data you need to allocate before compile time and it is not too big.	You can use heap if you don't know exactly how much data you will need at runtime or if you need to allocate a lot of data.
+    
+    4. In a multi-threaded situation each thread will have its own completely independent stack but they will share the heap. Stack is thread specific and Heap is application specific. The stack is important to consider in exception handling and thread executions.
+
+* If a node X is added to the queue in the kth round, the length of the shortest path between the root node and X is exactly k. That is to say, you are already in the shortest path the first time you find the target node. 
+
+
+* Never forget to take the time complexity of built-in operations into consideration when you compute the time complexity for your solution.
+
+* _**Amortized Analysis**_ is used for algorithms where an occasional operation is very slow, but most of the other operations are faster. In Amortized Analysis, we analyze a sequence of operations and guarantee a worst case average time which is lower than the worst case time of a particular expensive operation. [E.g](https://www.geeksforgeeks.org/analysis-algorithm-set-5-amortized-analysis-introduction/)
+    1. The amortized analysis doesn’t involve probability. There is also another different notion of average case running time where algorithms use randomization to make them faster and expected running time is faster than the worst case running time. These algorithms are analyzed using Randomized Analysis. Examples of these algorithms are Randomized Quick Sort, Quick Select and Hashing. We will soon be covering Randomized analysis in a different post.
+    2. The Amortized Analysis done for Dynamic Array example is called Aggregate Method.
+ 
+* **Iterators:**
+    1. An iterator is an object that enables a programmer to traverse a container, particularly lists.
+    2. Essentially, an iterator can be used to iterate over any container object. For our purpose, the container object is a binary search tree. If such an iterator is defined, then the traversal logic can be abstracted out and we can simply make use of the iterator to process the elements in a certain order.
+            
+            1. new_iterator = BSTIterator(root);
+            2. while (new_iterator.hasNext())
+            3.     process(new_iterator.next());
+
+## Time Analysis
 * **[Time Analysis:](https://www.geeksforgeeks.org/analysis-of-algorithms-set-3asymptotic-notations/)**
     1. **Big-O:** Upper bound. The Big O notation defines an upper bound of an algorithm, it bounds a function only from above.
                             
@@ -53,18 +92,34 @@
 
 * **[Average Case Analysis:](https://www.youtube.com/watch?v=ElhIcC4f710)** Sigma * P(i) * Cost(i). [Another Source Here](https://www.geeksforgeeks.org/analysis-of-algorithms-set-2-asymptotic-analysis/)
 
+* Sorting algorithms always have avg run time as worst cases except: **Quick Sort, Bucket Sort**
 
-* **Queue vs. Stack**:
-    1. Queue: FIFO (First in First Out). The insert operation is also called **enqueue** and the new element is always added at the end of the queue. The delete operation is called **dequeue**. You are only allowed to remove the first element. To implement a queue, we may use a dynamic structure such as a vector or a linked list.
-        1. Circular Queue: We may use a fixed-size array and two pointers to indicate the starting position and the ending position. And the goal is to reuse the wasted storage we mentioned previously.
-    2. Stack: First in Last Out.
-    
+## Trees / Binary / Binary Search
+
+* A full binary tree (sometimes proper binary tree or 2-tree) is a tree in which every node other than the leaves has two children. In a full binary tree all nodes have either 0 or 2 children. Both types of nodes can appear at all levels in the tree
+
+* A complete binary tree is a binary tree is a tree that follows the heap structures, add and remove from furthest breadth-first search see if the tree can be formed OR ANOTHER DEF: At the level above the leaves nodes can have 0, 1 or 2 children. ALSO, the last level must be filled from left to right without leaving any gaps. Other than these levels all nodes must have 2 children.
+
+* A perfect binary tree is a binary tree where each nodes except the leaves have 2 children.
+
+* Traverse to left most child in a BT complexity is O(N) due to the fact that the BT can be a list basically but if it is said to be a balanced BST, then iterating to left most child is O(logN)
+
+* **Depth** Of Root = 0 (Same as level), **Height** of Leaf = 0, The depth of a node is the number of edges from the node to the tree's root node.
+A root node will have a depth of 0. The height of a node is the number of edges on the longest path from the node to a leaf.
+A leaf node will have a height of 0.
+
+*  A leaf is a node with no children.
+
+* Maximum number of nodes in a height of h with n nodes: ceil(n / (2^(h + 1)))
+        
 * Inorder, Preorder, Postorder: Code Always Have Recursion(Left), Recursion(Right) stabled, only the print statement changes
     1. Inorder: Left First Then Root Then Right
     1. Preorder: Root First Then Left then Right 
     1. Postorder: Left Then Right Then Root
     1. Look at the root position and made will be clear.
     1. Post-order is widely use in [mathematical expression. E.g.](https://leetcode.com/explore/learn/card/data-structure-tree/134/traverse-a-tree/992/). It is easier to write a program to parse a post-order expression. You can easily figure out the original expression using the inorder traversal. However, it is not easy for a program to handle this expression since you have to check the priorities of operations. If you handle this tree in postorder, you can easily handle the expression using a stack. Each time when you meet a operator, you can just pop 2 elements from the stack, calculate the result and push the result back into the stack.
+
+* In Binary Search Tree, **Inorder Successor** of an input node can also be defined as the node with the smallest key greater than the key of input node.
 
 *  _**Top-down vs Bottom-up:**_
     1. **_"Top-down" Solution:_**
@@ -79,151 +134,21 @@
 
 * To understand if a code is "Top-down" or "Bottom-Up" check the code. Imagine the call stack.
 
-* Depth-first search = Depth increases gradually 
+* Balanced Tree Assumption On Interviews
 
-* Breadth-first search = Breadth increases gradually - Check the code for the Binary Search Tree
+## Bit Manipulation
 
-* Binary-tree -> Recursion or Queues
+* a XOR a is 0. a XOR a XOR b is b.
 
-* **Recursion:** Recursion is an approach to solving problems using a function that calls itself as a subroutine. The recursion call continues until it reaches a point where the subproblem can be solved without further recursion. A recursive function should have the following properties so that it does not result in an infinite loop:
-    1. A simple **_base case_** (or cases) also known as _bottom case_ — a terminating scenario that does not use recursion to produce an answer.
-    2. A set of rules, also known as _**recurrence relation**_ that reduces all other cases towards the base case.
-    3. Define recurrence relation and base cases then went to implement.
-    
-* There are mainly two parts of the space consumption that one should bear in mind when calculating the space complexity of a recursion algorithm: **recursion related** and **non-recursion related space.**
-    1. **Recursion Related Space:** The recursion related space refers to the memory cost that is incurred directly by the recursion, i.e. the stack to keep track of recursive function calls. In order to complete a typical function call, the system should allocate some space in the stack to hold three important pieces of information:
-        1. The returning address of the function call. Once the function call is completed, the program should know where to return to, i.e. the point before the function call; 
-        2. The parameters that are passed to the function call; 
-        3. The local variables within the function call.
-        4. Example: Mergesort making copies of the array into subarrays in each iteration. Keeping previous iterations from the program such as the fibonacci series is not RRS!
-    2. **Non-Recursion Related Space:** As suggested by the name, the non-recursion related space refers to the memory space that is not directly related to recursion, which typically includes the space (normally in heap) that is allocated for the global variables. 
-        1. E.g: Keeping the values of previous fibonacci series calculations in a hashmap.
+* Bits needed to present a number is log(N)
 
-* It is due to these recursion related space consumption that sometimes one might run into a situation called stack overflow, where the stack allocated for a program reaches its maximum space limit and the program ends up with failure. Therefore, when designing a recursion algorithm, one should carefully evaluate if there is a possibility of stack overflow when the input scales up.
-        
-* Execution tree, which is a tree that is used to denote the execution flow of a recursive function in particular. Each node in the tree represents an invocation of the recursive function. Therefore, the total number of nodes in the tree corresponds to the number of recursion calls during the execution. Could be used to approximate time complexity.
+* ~k == -(k+1)
 
-* Given a recursion algorithm, its time complexity O(T) is typically the product of the number of recursion invocations (denoted as R) and the time complexity of calculation (denoted as O(s) that incurs along with each recursion call:
-    1. **O(T) = R * O(s)**
-    2. One could also use **Master Theorem** to find the answer.
+* Bitmask approach is important.
 
-* Recursion time complexity: [Example Here.](https://www.youtube.com/watch?v=gCsfk2ei2R8)
-    1. **Substitution Method:** We make a guess for the solution and then we use mathematical induction to prove the the guess is correct or incorrect. K here is the step number. It is not and random number.
+* a ^ b = c, then a ^ c = b
 
-    2. **Recurrence Tree Method:** In this method, we draw a recurrence tree and calculate the time taken by every level of tree.The pattern is typically a arithmetic or geometric series.
-
-    3. **Master Method:** Master Method is a direct way to get the solution. The master method works only for following type of recurrences or for recurrences that can be transformed to following type.
-    T(n) = aT(n/b) + f(n) where a >= 1 and b > 1
-    
-* Sorting algorithms always have avg run time as worst cases except: **Quick Sort, Bucket Sort**
-
-* **Insertion sort**:
-    1. **O(N^2) worst case, O(N) best**; [E.g:](https://www.youtube.com/watch?v=JU767SDMDvA)
-    2. Iterate through left to right. Swap the current element to its left until it is in correct position then continue from the next index of the swapped elements original position.
-    3. Builds a sorted list from left to right in each iteration.
-    3. Gives good performance when the list is almost sorted.
-    4. Worst case time complexity of insertion sort where position of the data to be inserted is calculated using binary search
-    does not change the time complexity. Applying binary search to calculate the position of 
-    the data to be inserted doesn't reduce the time complexity of insertion sort. 
-    This is because insertion of a data at an appropriate position involves two steps: 1. Calculate the position. 2. Shift the data from the position calculated in step #1 one step right to create a gap where the data will be inserted. 
-    Using binary search reduces the time complexity in step #1 from O(N) to O(logN). But, the time complexity in step #2 still remains O(N). So, overall complexity remains O(N^2).
-    5. **Best: O(N), Worst: O(N^2)**
-    
-* **Selection sort**: 
-    1. **O(N^2) worst case, O(N^2)** best; [E.g:](https://www.youtube.com/watch?v=g-PGLbMth_g)
-    2. Find minimum from unsorted partition by iterating with minimum-finder algorithm with O(N), move it to sorted partition.
-    3. Worst sorting algorithm.
-
-* **Bubble Sort:** 
-    1. 1 4 5 7 2 3 -> 1 4 5 2 3 7 -> 1 4 2 3 5 7 -> 1 2 3 4 5 7
-    2. Walk through the WHOLE array from left to right N times and swap the elements adjacent to each other on the iteration index.
-    3. Takes the greatest element to the end of the array. Shortens the search range by one in each iteration.
-    4. Could be optimised to break the loop if no elements are swapped during an iteration.
-    5. **Best: O(N), Worst: O(N^2)**
-
-
-* **Merge Sort:**
-    1. Divide And Conquer.
-    2. Split the array until arrays with one elements are met.
-    3. Examine the elements are store them back to temporary arrays.
-    4. Merge smaller sorted arrays into bigger arrays making the bigger arrays sorted.
-    5. **Merge:**
-        1. Requires two _**sorted**_ arrays.
-        2. Set i = 0, j = 0, a = 0. Iterate through sorted arrays by comparing their current indexes. Find the smaller element and add it to the bigger element and increment either i or j depending on where the element is picked from.
-        3. After the iterations finish there will be an only one array which its elements are not added since the comparing while loop checks for whether the size of each the arrays are met
-        . Use two while loops to add all of the left small arrays elements into the bigger array.
-        4. Time complexity O(m+ n). 
-    6. Space complexity O(n). .If stack frames is counted, then it's O(n)+ O(log n). [Explained here. ](https://www.youtube.com/watch?v=0nlPxaC2lTw&t=602s)Not an in-place algorithm. Naive version O(n logn) due to keeping all the arrays without deletion leads to n memory allocation in each level and since we are doing a total of log n allocations the complexity is O(n logn). If we delete the unused arrays we will have at most n (the left sub array and right subarray )+ right subbarays childs n / 2 + n / 4 + n/ 8... which is O(2n) which is O(n).
-    7. Stable sorting algorithm since making "L <= R" ensures that both array have the original order reserved since we favor the left side before right side. E.g 1 2 2 2 3 => Left, 2 2 2 4 5 => Right. If we favor right over left, the order will be changed since the original array is 1 2 2 2 3 2 2 2 4 5.
-    8. Time complexity O(n logn). Merge is O(m + n) = O(n) since m = n = n / 2, for loops are total of O(0 to middle) + O(middle to len(array)) = O(n). 
-
-
-* **Head vs Tail Recursion:**
-    1. **(Non-Tail-Recursive) Head Recursion**: You make a recursive call first then do the calculation once the call is back. This method is prone to stack overflow if we exceed the stack limit.
-    
-           public int factorial(int n) {
-           if (n == 0) {
-              return 1;
-           } else {
-              return n * factorial(n - 1);
-           }
-    2. **Tail Recursion**: A recursive function is tail recursive when recursive call is the last thing executed by the function. C, C++ support the optimization of tail recursion functions. On the other hand, Java and Python do not support tail recursion optimization.
-    3. Tail recursion doesnt add to the call stack. [E.g.](https://stackoverflow.com/questions/33923/what-is-tail-recursion) 
-    Although some languages does not support it such as Java.
-    4. _Tail call elimination:_ The tail recursive functions considered better than non tail recursive functions as tail-recursion can be optimized by compiler. The idea used by compilers to optimize tail-recursive functions is simple, since the recursive call is the last statement, there is nothing left to do in the current function, so saving the current function’s stack frame is of no use 
-    5. Tail recursion could optimize the space complexity of the algorithm, by eliminating the stack overhead incurred by recursion. More importantly, with tail recursion, one could avoid the problem of stack overflow that comes often with recursion
-    6. Another advantage about tail recursion is that often times it is easier to read and understand, compared to non-tail-recursion. Because there is no post-call dependency in tail recursion (i.e. the recursive call is the final action in the function), unlike non-tail-recursion. 
-
-* **Call Stack:** A call stack is a stack data structure that stores information about the active subroutines of a computer program. This kind of stack is also known as an execution stack, program stack, control stack, run-time stack, or machine stack, and is often shortened to just "the stack". [E.g.](https://www.youtube.com/watch?v=Q2sFmqvpBe0)
-
-* A _stable_ sorting algorithm is said to be if two objects with equal keys appear in the same order in sorted output as they appear in the input unsorted array. Some sorting algorithms are stable by nature like Insertion sort, Merge Sort, Bubble Sort, Count Sort. And some sorting algorithms are not, like Heap Sort, Quick Sort, etc.
-
-* **In-place vs out-of-place**:
-    1. In-place In-place means that the algorithm does not use extra space for manipulating the input but may require a small though nonconstant extra space for its operation. Usually, this space is O(log n), though sometimes anything in o(n) (Smaller than linear) is allowed. For array of 1073741824 size it is only taking 30 units of space.
-    2. Out-of-place means that the algorithm is NOT in-place so according to the definition above it is considered any space usage greater than O(log n).
-  
-* **Dangling pointers:** Pointer which points to a de-allocated memory. Happens generally when two pointers are pointing towards the same memory address. Could lead to crashes.
-
-* **Space complexity of a recursive function:** Look at the recursion tree and try to capture a moment where the recursion call stack is at its max. Iterate from beginning to end if your are having bad time. Just because the recursive calls are high does not mean that the space complexity will be high.
-
-* A full binary tree (sometimes proper binary tree or 2-tree) is a tree in which every node other than the leaves has two children. In a full binary tree all nodes have either 0 or 2 children. Both types of nodes can appear at all levels in the tree
-
-* A complete binary tree is a binary tree is a tree that follows the heap structures, add and remove from furthest breadth-first search see if the tree can be formed OR ANOTHER DEF: At the level above the leaves nodes can have 0, 1 or 2 children. ALSO, the last level must be filled from left to right without leaving any gaps. Other than these levels all nodes must have 2 children.
-
-* A perfect binary tree is a binary tree where each nodes except the leaves have 2 children.
-
-* **Depth** Of Root = 0 (Same as level), **Height** of Leaf = 0, The depth of a node is the number of edges from the node to the tree's root node.
-A root node will have a depth of 0. The height of a node is the number of edges on the longest path from the node to a leaf.
-A leaf node will have a height of 0.
-
-*  A leaf is a node with no children.
-
-* Maximum number of nodes in a height of h with n nodes: ceil(n / (2^(h + 1)))
-
-* **Stack Memory vs Heap Memory**:
-    1. Stack Memory: Variables allocated on the stack are stored directly to the memory and access to this memory is very fast, and it's allocation is dealt with when the program is **compiled**. When a function or a method calls another function which in turns calls another function etc., the execution of all those functions remains suspended until the very last function returns its value. The stack is always reserved in a LIFO order, the most recently reserved block is always the next block to be freed. This makes it really simple to keep track of the stack, freeing a block from the stack is nothing more than adjusting one pointer.
-
-    2. Variables allocated on the heap have their memory allocated at run time and accessing this memory is a bit slower, but the heap size is only limited by the size of virtual memory . Element of the heap have no dependencies with each other and can always be accessed randomly at any time. You can allocate a block at any time and free it at any time. This makes it much more complex to keep track of which parts of the heap are allocated or free at any given time.
-    
-    3. You can use the stack if you know exactly how much data you need to allocate before compile time and it is not too big.	You can use heap if you don't know exactly how much data you will need at runtime or if you need to allocate a lot of data.
-    
-    4. In a multi-threaded situation each thread will have its own completely independent stack but they will share the heap. Stack is thread specific and Heap is application specific. The stack is important to consider in exception handling and thread executions.
-
-* If a node X is added to the queue in the kth round, the length of the shortest path between the root node and X is exactly k. That is to say, you are already in the shortest path the first time you find the target node. 
-
-* The first path you found in DFS is not always the shortest path.
-
-* DFS and BFS could be written with same algorithm iteratively - using Queue(BFS), Stack(DFS)
-
-* DFS can suffer from stack overflow if the recursion number is too high. We can use a iterative stack version to overcome this since recursion limit is generally smaller than stack size limit. Python has 1000 as recursion limit by default.
-
-* Never forget to take the time complexity of built-in operations into consideration when you compute the time complexity for your solution.
-
-* _**Amortized Analysis**_ is used for algorithms where an occasional operation is very slow, but most of the other operations are faster. In Amortized Analysis, we analyze a sequence of operations and guarantee a worst case average time which is lower than the worst case time of a particular expensive operation. [E.g](https://www.geeksforgeeks.org/analysis-algorithm-set-5-amortized-analysis-introduction/)
-    1. The amortized analysis doesn’t involve probability. There is also another different notion of average case running time where algorithms use randomization to make them faster and expected running time is faster than the worst case running time. These algorithms are analyzed using Randomized Analysis. Examples of these algorithms are Randomized Quick Sort, Quick Select and Hashing. We will soon be covering Randomized analysis in a different post.
-    2. The Amortized Analysis done for Dynamic Array example is called Aggregate Method.
- 
-##Two-Pointer Approach
+## Two-Pointer Approach
 
 * Use _**two-pointer technique**_ is that you want to iterate the array from two ends to the middle. So you can use the two-pointer technique:
 One pointer starts from the beginning while the other pointer starts from the end.
@@ -476,7 +401,122 @@ but in singly linked list it would be O(N) since we would need to find the nodes
 * **Quick Select:** Use the idea of partitioning recursively to find the kth smallest element. This makes one recursive call instead of two as in Naive Quicksort. Average O(N) time complexity, worst O(N^2). Use a good pivot to avoid worst.
     1. T(n) = cn + T(n/2)
     2. c(n + n/2 + n/4 + ... + 2 + 1) = c(2n) = O(n) 
+
+##Merge Sort
+
+* **Merge Sort:**
+    1. Divide And Conquer.
+    2. Split the array until arrays with one elements are met.
+    3. Examine the elements are store them back to temporary arrays.
+    4. Merge smaller sorted arrays into bigger arrays making the bigger arrays sorted.
+    5. **Merge:**
+        1. Requires two _**sorted**_ arrays.
+        2. Set i = 0, j = 0, a = 0. Iterate through sorted arrays by comparing their current indexes. Find the smaller element and add it to the bigger element and increment either i or j depending on where the element is picked from.
+        3. After the iterations finish there will be an only one array which its elements are not added since the comparing while loop checks for whether the size of each the arrays are met
+        . Use two while loops to add all of the left small arrays elements into the bigger array.
+        4. Time complexity O(m+ n). 
+    6. Space complexity O(n). .If stack frames is counted, then it's O(n)+ O(log n). [Explained here. ](https://www.youtube.com/watch?v=0nlPxaC2lTw&t=602s)Not an in-place algorithm. Naive version O(n logn) due to keeping all the arrays without deletion leads to n memory allocation in each level and since we are doing a total of log n allocations the complexity is O(n logn). If we delete the unused arrays we will have at most n (the left sub array and right subarray )+ right subbarays childs n / 2 + n / 4 + n/ 8... which is O(2n) which is O(n).
+    7. Stable sorting algorithm since making "L <= R" ensures that both array have the original order reserved since we favor the left side before right side. E.g 1 2 2 2 3 => Left, 2 2 2 4 5 => Right. If we favor right over left, the order will be changed since the original array is 1 2 2 2 3 2 2 2 4 5.
+    8. Time complexity O(n logn). Merge is O(m + n) = O(n) since m = n = n / 2, for loops are total of O(0 to middle) + O(middle to len(array)) = O(n). 
+
+## Insertion sort
+
+* **Insertion sort**:
+    1. **O(N^2) worst case, O(N) best**; [E.g:](https://www.youtube.com/watch?v=JU767SDMDvA)
+    2. Iterate through left to right. Swap the current element to its left until it is in correct position then continue from the next index of the swapped elements original position.
+    3. Builds a sorted list from left to right in each iteration.
+    3. Gives good performance when the list is almost sorted.
+    4. Worst case time complexity of insertion sort where position of the data to be inserted is calculated using binary search
+    does not change the time complexity. Applying binary search to calculate the position of 
+    the data to be inserted doesn't reduce the time complexity of insertion sort. 
+    This is because insertion of a data at an appropriate position involves two steps: 1. Calculate the position. 2. Shift the data from the position calculated in step #1 one step right to create a gap where the data will be inserted. 
+    Using binary search reduces the time complexity in step #1 from O(N) to O(logN). But, the time complexity in step #2 still remains O(N). So, overall complexity remains O(N^2).
+    5. **Best: O(N), Worst: O(N^2)**
+
+## Counting Sort
+* Inputs must be positive integers
+* Used when the range of numbers is small.
+* Counting sort assumes that each of the elements is an integer in the range 0 to k, for some integer k.
+* Time complexity O(n + k) 
+* Space complexity O(n + k)
+* Stable
+* Map objects to positive integers to do CS
+* **How to:**
+    1. Create an array with K elements
+    2. Iterate through input array and count the elements of array
+    3. Convert count array to summing array by summing its value and previous index value as the current value.
+    4. Create a result array Iterate through input array and look at the current element and get its position by using 
+    the summing array and decrement its index by one due to the fact that duplicate elements may occur.
+    5. Repeat until input array is exhausted.
+
+## Bucket Sort
+* Store elements in buckets.
+* Sort the buckets by *insertion sort.*
+* The reason insertion sort is used in practice is that we expect the buckets to be small, and for small lists, insertion sort is much faster than anything else. Even when implementing merge sort or quicksort, insertion sort is used when the list gets small enough (say below 20 items or so).
+
+## Selection sort
+
+* **Selection sort**: 
+    1. **O(N^2) worst case, O(N^2)** best; [E.g:](https://www.youtube.com/watch?v=g-PGLbMth_g)
+    2. Find minimum from unsorted partition by iterating with minimum-finder algorithm with O(N), move it to sorted partition.
+    3. Worst sorting algorithm.
+
+## Bubble Sort
+
+* **Bubble Sort:** 
+    1. 1 4 5 7 2 3 -> 1 4 5 2 3 7 -> 1 4 2 3 5 7 -> 1 2 3 4 5 7
+    2. Walk through the WHOLE array from left to right N times and swap the elements adjacent to each other on the iteration index.
+    3. Takes the greatest element to the end of the array. Shortens the search range by one in each iteration.
+    4. Could be optimised to break the loop if no elements are swapped during an iteration.
+    5. **Best: O(N), Worst: O(N^2)**
+
+##Recursion
+* **Recursion:** Recursion is an approach to solving problems using a function that calls itself as a subroutine. The recursion call continues until it reaches a point where the subproblem can be solved without further recursion. A recursive function should have the following properties so that it does not result in an infinite loop:
+    1. A simple **_base case_** (or cases) also known as _bottom case_ — a terminating scenario that does not use recursion to produce an answer.
+    2. A set of rules, also known as _**recurrence relation**_ that reduces all other cases towards the base case.
+    3. Define recurrence relation and base cases then went to implement.
     
+* There are mainly two parts of the space consumption that one should bear in mind when calculating the space complexity of a recursion algorithm: **recursion related** and **non-recursion related space.**
+    1. **Recursion Related Space:** The recursion related space refers to the memory cost that is incurred directly by the recursion, i.e. the stack to keep track of recursive function calls. In order to complete a typical function call, the system should allocate some space in the stack to hold three important pieces of information:
+        1. The returning address of the function call. Once the function call is completed, the program should know where to return to, i.e. the point before the function call; 
+        2. The parameters that are passed to the function call; 
+        3. The local variables within the function call.
+        4. Example: Mergesort making copies of the array into subarrays in each iteration. Keeping previous iterations from the program such as the fibonacci series is not RRS!
+    2. **Non-Recursion Related Space:** As suggested by the name, the non-recursion related space refers to the memory space that is not directly related to recursion, which typically includes the space (normally in heap) that is allocated for the global variables. 
+        1. E.g: Keeping the values of previous fibonacci series calculations in a hashmap.
+
+* It is due to these recursion related space consumption that sometimes one might run into a situation called stack overflow, where the stack allocated for a program reaches its maximum space limit and the program ends up with failure. Therefore, when designing a recursion algorithm, one should carefully evaluate if there is a possibility of stack overflow when the input scales up.
+        
+* Execution tree, which is a tree that is used to denote the execution flow of a recursive function in particular. Each node in the tree represents an invocation of the recursive function. Therefore, the total number of nodes in the tree corresponds to the number of recursion calls during the execution. Could be used to approximate time complexity.
+
+* Given a recursion algorithm, its time complexity O(T) is typically the product of the number of recursion invocations (denoted as R) and the time complexity of calculation (denoted as O(s) that incurs along with each recursion call:
+    1. **O(T) = R * O(s)**
+    2. One could also use **Master Theorem** to find the answer.
+
+* Recursion time complexity: [Example Here.](https://www.youtube.com/watch?v=gCsfk2ei2R8)
+    1. **Substitution Method:** We make a guess for the solution and then we use mathematical induction to prove the the guess is correct or incorrect. K here is the step number. It is not and random number.
+
+    2. **Recurrence Tree Method:** In this method, we draw a recurrence tree and calculate the time taken by every level of tree.The pattern is typically a arithmetic or geometric series.
+
+    3. **Master Method:** Master Method is a direct way to get the solution. The master method works only for following type of recurrences or for recurrences that can be transformed to following type.
+    T(n) = aT(n/b) + f(n) where a >= 1 and b > 1
+   
+* **Head vs Tail Recursion:**
+    1. **(Non-Tail-Recursive) Head Recursion**: You make a recursive call first then do the calculation once the call is back. This method is prone to stack overflow if we exceed the stack limit.
+    
+           public int factorial(int n) {
+           if (n == 0) {
+              return 1;
+           } else {
+              return n * factorial(n - 1);
+           }
+    2. **Tail Recursion**: A recursive function is tail recursive when recursive call is the last thing executed by the function. C, C++ support the optimization of tail recursion functions. On the other hand, Java and Python do not support tail recursion optimization.
+    3. Tail recursion doesnt add to the call stack. [E.g.](https://stackoverflow.com/questions/33923/what-is-tail-recursion) 
+    Although some languages does not support it such as Java.
+    4. _Tail call elimination:_ The tail recursive functions considered better than non tail recursive functions as tail-recursion can be optimized by compiler. The idea used by compilers to optimize tail-recursive functions is simple, since the recursive call is the last statement, there is nothing left to do in the current function, so saving the current function’s stack frame is of no use 
+    5. Tail recursion could optimize the space complexity of the algorithm, by eliminating the stack overhead incurred by recursion. More importantly, with tail recursion, one could avoid the problem of stack overflow that comes often with recursion
+    6. Another advantage about tail recursion is that often times it is easier to read and understand, compared to non-tail-recursion. Because there is no post-call dependency in tail recursion (i.e. the recursive call is the final action in the function), unlike non-tail-recursion. 
+
 ## Hashtable And HashSet
 
 * Hash Table is a data structure which organizes data using hash functions in order to support quick insertion and search.
@@ -590,6 +630,10 @@ Given a set S and a relation R, a R b, indicates that a is related to b with the
 
 * Trie, also called prefix tree, is a special form of a Nary tree.
 
+* Prefix -> A prefix of a string S is a substring of S that occurs at the beginning of S. "banana" -> "b", "ba", "ban"
+
+* Suffix -> A suffix of a string S is a substring that occurs at the end of S. "banana" -> "a", "na", "ana"
+
 * A Trie is a special form of a Nary tree. Typically, a trie is used to store strings. Each Trie node represents a string (a prefix). 
 
 * Trie -> reTrieval [Video Explanation Here](https://www.youtube.com/watch?v=-urNrIAQnNo)
@@ -640,9 +684,33 @@ In the worst case you'll have to compare your pattern with O(log n) nodes.
 
 * Top-down and Bottom-Up are not the same in DP and BT algorithms. Top-down in DP means solving subproblems to solve the bigger problem where are in BT this is considered as bottom-up. (Imagine the execution tree.) 
 
+## Greedy Algorithm
+
 * **Greedy Algorithms:**
     * Solves a problem by doing what appears to be best (cheapest) thing at each step.
     * Not guaranteed to find the optimal solution.
+
+## DFS
+* Depth-first search = Depth increases gradually 
+
+* DFS can suffer from stack overflow if the recursion number is too high. We can use a iterative stack version to overcome this since recursion limit is generally smaller than stack size limit. Python has 1000 as recursion limit by default.
+
+* The first path you found in DFS is not always the shortest path.
+
+* DFS and BFS could be written with same algorithm iteratively - using Queue(BFS), Stack(DFS)
+
+* **Backtracking vs DFS:** [Answer Here!](https://stackoverflow.com/questions/49311627/intuition-behind-using-backtracking-and-not-dfs) 
+    1. The difference between DFS and backtracking is subtle, but we can summarize like this: DFS is a technique for searching a graph, while backtracking is a problem solving technique (which consists of DFS + pruning, such programs are called backtrackers).
+    2. Backtracking is far more efficient for solving some class of problems than the plain DFS.
+The difference between DFS and backtracking is subtle, but we can summarize like this: DFS is a technique for searching a graph, while backtracking is a problem solving technique (which consists of DFS + pruning, such programs are called backtrackers). So, DFS visits each node until it finds the required value (in your case the target word), while backtracking is smarter - it doesn't even visit particular branches when it is certain that the target word would not be found there.
+Imagine that you have a dictionary of all possible words and searching through the board to find all words that exist on the board (Boggle game). You start to traverse the board and stumble upon the letters 'J','A','C' in that order, so the current prefix is "JAC". Great. Let's look at the neighbors of the letter 'C', e.g. they are 'A', 'Q', 'D', 'F'. What would plain DFS do? It would skip 'A' because it came from that node to 'C', but it would then blindly visit each of the remaining nodes hoping to find some word, even though we know there are no words starting with "JACQ", "JACD" and "JACF". Backtracker would immediately prune branches with "JACQ", "JACD" and "JACF" by e.g. consulting an auxiliary trie data structure built from the dictionary. At some point even DFS would backtrack, but only when it does not have where to go - i.e. all surrounding letters have already been visited.
+    3. The conventional DFS would for each node blindly check all neighbor nodes until it finds the target word or until all its neighbors are visited - it would only then backtrack. Backtracker on the other hand constantly checks whether we are on the "right track"
+    4. DFS is a way to explore or traverse a graph. Uses the concept of going as deep as possible given the choices.
+    Backtracking, while usually implemented via DFS, focuses more on the concept of pruning unpromising search subspaces as early as possible and stops the search when possible.
+
+## BFS
+
+* Breadth-first search = Breadth increases gradually - Check the code for the Binary Search Tree.
 
 ## Graph Theory
 

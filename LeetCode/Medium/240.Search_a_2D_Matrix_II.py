@@ -1,0 +1,16 @@
+class Solution:
+    def searchMatrix(self, matrix, target):
+        if len(matrix) == 0 or len(matrix[0]) == 0:
+            return False
+
+        row, col = 0, len(matrix[0]) - 1
+
+        while col >= 0 and row < len(matrix):
+            if matrix[row][col] == target:
+                return True
+            elif matrix[row][col] > target:
+                col -= 1
+            else:
+                row += 1
+
+        return False 
