@@ -1,4 +1,4 @@
-# Hacker Rank And Leet Code Solutions
+# Leet Code And Hacker Rank Solutions
 Solutions for the problems in Leet Code And Hacker Rank. All of the solutions here are 
 passing all the test cases in the Leet Code and Hacker Rank evaluation.
 
@@ -12,7 +12,7 @@ passing all the test cases in the Leet Code and Hacker Rank evaluation.
 
 `Hacker Rank:` Folder for solutions of Hacker Rank questions.
  
-`OOP:` Folder for object oriented design patters with examples.
+`OOP:` Folder for object oriented design patterns with examples.
 
 `Algorithms:` Folders for solutions of _**ALGORITHMS**_ problems.
 
