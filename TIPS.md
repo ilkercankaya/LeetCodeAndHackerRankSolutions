@@ -33,6 +33,13 @@
         1. Circular Queue: We may use a fixed-size array and two pointers to indicate the starting position and the ending position. And the goal is to reuse the wasted storage we mentioned previously.
     2. Stack: First in Last Out.
 
+* **Monotonic Stack, Monotonic Queue**:
+    * Stacks that are strictly increasing or decreasing.
+    * Solves find closest element to right or left problems.
+    * 4 3 2 1 -> Stack is 4->3->2->1. Image the next element is 5. This means that 5 will pop everything that is smaller than it.
+    This will mean that our new number on the iteration is actually the closest number that is greater than the all the popped nums otherwise they would have been popped by another number.
+    [Check Here For More Info](https://medium.com/algorithms-and-leetcode/monotonic-queue-explained-with-leetcode-problems-7db7c530c1d6)
+
 * **Call Stack:** A call stack is a stack data structure that stores information about the active subroutines of a computer program. This kind of stack is also known as an execution stack, program stack, control stack, run-time stack, or machine stack, and is often shortened to just "the stack". [E.g.](https://www.youtube.com/watch?v=Q2sFmqvpBe0)
 
 * A _stable_ sorting algorithm is said to be if two objects with equal keys appear in the same order in sorted output as they appear in the input unsorted array. Some sorting algorithms are stable by nature like Insertion sort, Merge Sort, Bubble Sort, Count Sort. And some sorting algorithms are not, like Heap Sort, Quick Sort, etc.
@@ -70,6 +77,16 @@
             1. new_iterator = BSTIterator(root);
             2. while (new_iterator.hasNext())
             3.     process(new_iterator.next());
+
+## Encapsulation vs Abstraction 
+
+* Encapsulation hides variables or some implementation that may be changed so often in a class to prevent outsiders access it directly. They must access it via getter and setter methods.
+
+* Abstraction is used to hiding something too but in a higher degree(class, interface). Clients use an abstract class(or interface) do not care about who or which it was, they just need to know what it can do.
+
+* Abstraction lets you focus on what the object does instead of how it does, while Encapsulation means hiding the internal details of how an object works. When you keep internal working details private, you can change it later with a better method.
+
+* In Java, Abstraction is supported using interface and abstract class while Encapsulation is supported using access modifiers e.g. public, private and protected.
 
 ## Time Analysis
 * **[Time Analysis:](https://www.geeksforgeeks.org/analysis-of-algorithms-set-3asymptotic-notations/)**
@@ -133,6 +150,8 @@ A leaf node will have a height of 0.
     4. Or you can think the problem in this way: for a node in a tree, if you know the answer of its children, can you calculate the answer of the node? If the answer is yes, solving the problem recursively from bottom up might be a good way.
 
 * To understand if a code is "Top-down" or "Bottom-Up" check the code. Imagine the call stack.
+
+* If we are traversing only a node at a time (either going left of a node or right of a node) and top-down approach is used to solve the problem. We can reduce the space complexity to O(1) by using tail-call optimization. [Example: Lowest Common Ancestor of a Binary Search Tree.](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/solution/)
 
 * Balanced Tree Assumption On Interviews
 
@@ -402,7 +421,7 @@ but in singly linked list it would be O(N) since we would need to find the nodes
     1. T(n) = cn + T(n/2)
     2. c(n + n/2 + n/4 + ... + 2 + 1) = c(2n) = O(n) 
 
-##Merge Sort
+## Merge Sort
 
 * **Merge Sort:**
     1. Divide And Conquer.
@@ -707,7 +726,16 @@ Imagine that you have a dictionary of all possible words and searching through t
     3. The conventional DFS would for each node blindly check all neighbor nodes until it finds the target word or until all its neighbors are visited - it would only then backtrack. Backtracker on the other hand constantly checks whether we are on the "right track"
     4. DFS is a way to explore or traverse a graph. Uses the concept of going as deep as possible given the choices.
     Backtracking, while usually implemented via DFS, focuses more on the concept of pruning unpromising search subspaces as early as possible and stops the search when possible.
+    5. Backtracking is used generally when we are asked to return a collection on valid answers rather than one answer.
 
+## Backtracking 
+* Could be thought as DFS + Pruning or optimized brute force.
+* You can understand when a question is asking for a set of valid answers, this indicates that the question could be a backtracking quesiton.
+* We have 3 keys to identify to write a backtracking algorithm. Model the problem in a ways such that:-
+    1. _Our Choice:_ In each iteration we should identify what to do to our current process.
+    2. _Our Constraint:_ Identify constraints to decide when to prune the backtracking and explore new paths.
+    3. _Our Goal:_ Means when we have successfully reached a goal and we should add the current path to the results list.
+    
 ## BFS
 
 * Breadth-first search = Breadth increases gradually - Check the code for the Binary Search Tree.
@@ -799,7 +827,7 @@ Imagine that you have a dictionary of all possible words and searching through t
         1. Remove it
         1. Repeat
    4. Note that a topological sort is not (necessarily) unique. This stems from the fact that at any point, we may have more than one vertex with in-degree 0 and we have to choose one among them
-   5. There is cycle if there is not a single vertex with in degree of 0. Ex. 0 -> 1, 1 -> 2, 2 -> 3, 3 -> 4, 4-> 0, 5-> 0. First 5 is taken out then we found out that there are no vertices with a in-degree of 0 therefore there is a cycle.
+   5. While iterating on the algo, there is a cycle if there isnt any single vertex with in degree of 0. Ex. 0 -> 1, 1 -> 2, 2 -> 3, 3 -> 4, 4-> 0, 5-> 0. First 5 is taken out then we found out that there are no vertices with a in-degree of 0 therefore there is a cycle.
     
     
         void Graph::topsort( )
@@ -884,7 +912,7 @@ Imagine that you have a dictionary of all possible words and searching through t
     5. Run time: **O(|V| + |E|)**
 
 ### Dijkstra’s algorithm:
-    
+   
    1. Dijkstra's Algorithm allows you to calculate the shortest path between one node (you pick which one) and every other node in the graph
    2. Dijkstra's original algorithm does not use a min-priority queue and runs in time O(|V|^2) |V| is the number of nodes).
    3. A very important thing is to note that each edge is only processed once.
@@ -923,7 +951,13 @@ Imagine that you have a dictionary of all possible words and searching through t
         2. One can avoid descrease key with using the visited node further to check when extracting from the heap. This would also require
         adding all the edges to a heap that is found within a vertex. This would mean that the heap can get as big as O(|E|). 
         The time complexity would grow up to be **O(|V| * log(|E|) + |E| * log(|E|))**
-        
+    
+   * If we use Fibonacci Heaps then the complexity turns out to be O(|E|+|V|log| V|) where as if Binary Heap (Min Heap) is used its O((|E| + |V|) log |V|)
+
+### Dijkstra vs. BFS 
+   
+   * Dijkstra's algorithm relies on the property that the shortest path from s to t is also the shortest path to any of the vertices along the path. This is exactly what BFS does.
+   * Or in another perspective: how would Dijkstra's algorithm behave if all the weights were 1? Exactly like BFS.
 
 ### Minimum Spanning Trees
    
@@ -967,6 +1001,23 @@ Imagine that you have a dictionary of all possible words and searching through t
 
 * **Time Complexity: O(|V| + |E|)**
 
+* BFS implementations differ in two ways:
+    1. Process children to visited when seen as a neighbour.
+    2. Process children to visited when its their turn.
+    * Approach 2 is used when each edge costs the same. Then when the neighbour is met during neighbour check it means that this is the most optimal
+    way to reach that neighbour node. Examples in: 01 Matrix, Walls And Gates
+    * This change happens when BFS used in a weighted graph. This is due to the fact that when a node is seen during neighbour check
+    this doesnt not mean that it is the optimal way to reach there ex:
+    
+    
+     # dijkstra - using bfs with approach 1 would yield a non optimal answer
+          A
+         4 6
+        B   C
+         5 2
+          D
+    
+    * Dijkstra can also be implemented using approach one, check 1102. Path With Maximum Minimum Value.
 
 ## Behavioural Part
 

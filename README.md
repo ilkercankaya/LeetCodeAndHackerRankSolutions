@@ -1,6 +1,6 @@
 # Hacker Rank And Leet Code Solutions
-My solutions for the problems in Hacker Rank and Leet Code are shared. The solutions are provided by me. All of the solutions here are 
-passing all the test cases in the Hack Rank And Leet Code evaluation.
+Solutions for the problems in Leet Code And Hacker Rank. All of the solutions here are 
+passing all the test cases in the Leet Code and Hacker Rank evaluation.
 
 [My Leet Code Account](https://leetcode.com/ilkercankaya/)
 
@@ -8,10 +8,12 @@ passing all the test cases in the Hack Rank And Leet Code evaluation.
 
 ## The Folders and The Files
 
-`Hacker Rank:` Folders for solutions of Hacker Rank questions.
+`Leet Code:` Folder for solutions of Leet Code questions.
 
-`Leet Code:` Folders for solutions of Leet Code questions.
+`Hacker Rank:` Folder for solutions of Hacker Rank questions.
  
+`OOP:` Folder for object oriented design patters with examples.
+
 `Algorithms:` Folders for solutions of _**ALGORITHMS**_ problems.
 
 `Data Structures:` Folders for solutions of _**DATA STRUCTURES**_ problems.

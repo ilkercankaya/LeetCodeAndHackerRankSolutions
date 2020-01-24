@@ -7,11 +7,12 @@ def countingSort(arr, k, offset=0):
     for i in range(1, len(runningSum)):
         runningSum[i] += runningSum[i - 1]
 
-    # runningSum[i] means there are runningSum[i] number of elements that are less than or equal to runningSum[i]
+    # runningSum[i] means there are runningSum[i] number of elements that are less than or equal to i
 
     result = [None] * len(arr)
 
-    for num in arr:
+    # reversed makes the algorithm stable
+    for num in reversed(arr):
         runningSum[num + offset] -= 1
         result[runningSum[num + offset]] = num
     return result

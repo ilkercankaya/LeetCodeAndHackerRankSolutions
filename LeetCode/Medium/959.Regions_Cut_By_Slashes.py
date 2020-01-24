@@ -17,6 +17,7 @@ class Solution:
             if aRoot == bRoot:
                 return
 
+            # make the smaller tree point to larger, no abs is used parent[x] is negative, be careful
             if parents[aRoot] < parents[bRoot]:
                 parents[aRoot] += parents[bRoot]
                 parents[bRoot] = aRoot
