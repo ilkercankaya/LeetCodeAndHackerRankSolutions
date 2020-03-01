@@ -740,6 +740,19 @@ Imagine that you have a dictionary of all possible words and searching through t
 
 * Breadth-first search = Breadth increases gradually - Check the code for the Binary Search Tree.
 
+## 0 - 1 BFS
+
+* Used in Graphs where each cost of vertex is either 0 or 1. Can also be 0 or N where N is an integer.
+* Needs a double-ended queue.
+* Below explanation uses the visited set assumption while doing BFS.
+* Why it works?:
+    * During a BFS, dequeue can only contain two consecutive levels since we need to process one level before starting the other. (Important for adding to back of the dequeue below)
+    * The idea is during BFS, vertexes with 0 cost are indicating the same level as the current node. So push the nodes 
+in the corresponding vertices with 0 costs to the front of the dequeue. Considers the nodes that are on the same level as the current node
+before going any further. Push the nodes with vertices cost 1 to the back of the dequeue. Consider them after the level of the current node is finished.
+In the end this will allow us to do djisktra without the need of a heap. Reducing time complexity to O(|E| + |V|).
+
+
 ## Graph Theory
 
 * ***A graph G= (V, E)*** consists of

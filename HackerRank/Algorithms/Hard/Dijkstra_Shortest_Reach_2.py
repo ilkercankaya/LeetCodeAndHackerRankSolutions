@@ -7,7 +7,7 @@ import re
 import sys
 import collections, queue
 
-# O(|E| * log(|E| + |V| * log(|E|) due to not using decrease priority, the heap grows up to O(|E|)
+# O(|E| * log(|E|) + |V| * log(|E|)) due to not using decrease priority, the heap grows up to O(|E|)
 def shortestReach(n, edges, s):
     shortestCosts = [float("inf")] * n
     s = s - 1

@@ -1,5 +1,5 @@
 # QHEAP1
-# Not easy because removing an element requires some tricks and thinking. Can not be found easily on the internet  as well.
+# Not easy because removing an element requires some tricks and thinking. Can not be found easily on the internet as well.
 
 
 # Heap Sort by ilkercan Kaya: 11/06/2019
