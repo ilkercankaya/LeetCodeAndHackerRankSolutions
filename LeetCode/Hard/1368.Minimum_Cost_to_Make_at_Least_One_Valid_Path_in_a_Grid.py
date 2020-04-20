@@ -2,7 +2,7 @@ import collections
 
 
 class Solution:
-    # 0 - 1 O(MN)
+    # 0 - 1 BFS - Time: O(MN)
     def minCost(self, grid) -> int:
         pq = collections.deque()
         visited = set()

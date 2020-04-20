@@ -27,21 +27,6 @@
 
 * BST + Sorted -> Insert = O(log N), find O(log N)
 
-
-* **Queue vs. Stack**:
-    1. Queue: FIFO (First in First Out). The insert operation is also called **enqueue** and the new element is always added at the end of the queue. The delete operation is called **dequeue**. You are only allowed to remove the first element. To implement a queue, we may use a dynamic structure such as a vector or a linked list.
-        1. Circular Queue: We may use a fixed-size array and two pointers to indicate the starting position and the ending position. And the goal is to reuse the wasted storage we mentioned previously.
-    2. Stack: First in Last Out.
-
-* **Monotonic Stack, Monotonic Queue**:
-    * Stacks that are strictly increasing or decreasing.
-    * Solves find closest element to right or left problems.
-    * 4 3 2 1 -> Stack is 4->3->2->1. Image the next element is 5. This means that 5 will pop everything that is smaller than it.
-    This will mean that our new number on the iteration is actually the closest number that is greater than the all the popped nums otherwise they would have been popped by another number.
-    [Check Here For More Info](https://medium.com/algorithms-and-leetcode/monotonic-queue-explained-with-leetcode-problems-7db7c530c1d6)
-
-* **Call Stack:** A call stack is a stack data structure that stores information about the active subroutines of a computer program. This kind of stack is also known as an execution stack, program stack, control stack, run-time stack, or machine stack, and is often shortened to just "the stack". [E.g.](https://www.youtube.com/watch?v=Q2sFmqvpBe0)
-
 * A _stable_ sorting algorithm is said to be if two objects with equal keys appear in the same order in sorted output as they appear in the input unsorted array. Some sorting algorithms are stable by nature like Insertion sort, Merge Sort, Bubble Sort, Count Sort. And some sorting algorithms are not, like Heap Sort, Quick Sort, etc.
 
 * **In-place vs out-of-place**:
@@ -77,6 +62,26 @@
             1. new_iterator = BSTIterator(root);
             2. while (new_iterator.hasNext())
             3.     process(new_iterator.next());
+
+## Queue vs. Stack:
+1. Queue: FIFO (First in First Out). The insert operation is also called **enqueue** and the new element is always added at the end of the queue. The delete operation is called **dequeue**. You are only allowed to remove the first element. To implement a queue, we may use a dynamic structure such as a vector or a linked list.
+        1. Circular Queue: We may use a fixed-size array and two pointers to indicate the starting position and the ending position. And the goal is to reuse the wasted storage we mentioned previously.
+2. Stack: First in Last Out.
+
+##Monotonic Stack, Monotonic Queue
+* Stacks that are strictly increasing or decreasing or sometimes, we can relax the strict monotonic condition, and can allow the stack or queue have repeat value.
+* For increasing stack -> smaller coming elements kicks out all the bigger elements in the stack to maintain a strictly increasing order. Smallest element in the window is located at 0th index, can not locate the biggest element of the window, it is not at the last index since this is an increasing stack ie. small values kicks big values.
+* For decreasing stack -> bigger coming elements kicks out all the smaller elements in the stack to maintain a strictly decreasing order. Biggest element in the window is located at last index index, can not locate the smallest element of the window, it is not at the first index since this is an decreasing stack ie. big values kicks small values.
+* The idea here is that we want to maintain an order in our stack whether decreasing or increasing. This ordering is needed due to invalidations caused elements wrt strict increasing or decreasing fact.
+* Most important implementation: Can get you the min or max from a [moving or sliding window](https://leetcode.com/problems/sliding-window-maximum/). Important clarifications, this can not get the second greatest or second biggest element, dont confuse it with heaps, it only and only works for min and max. We can only observe the min and max, we can only pop them if they are on the front or rear.
+* Solves find closest bigger element to right or left problems.
+* 4 3 2 1 -> Stack is 4->3->2->1. Image the next element is 5. This means that 5 will pop everything that is smaller than it.
+    This will mean that our new number on the iteration is actually the closest number that is greater than the all the popped nums otherwise they would have been popped by another number.
+    [Check Here For More Info](https://medium.com/algorithms-and-leetcode/monotonic-queue-explained-with-leetcode-problems-7db7c530c1d6)
+* [This min stack problem](https://leetcode.com/problems/min-stack/) is not the same with our monotonic stack even though we create an monotonic decreasing stack in the end, the methodology is not the same since in there we have a stack not a window. More reasoning, in monotonic queue every element is added to the queue after popping some elements on top but in this MinStack question there are times where we do not do that such as 1 4 3; stack will be 1 -> 1 - 3; 4 is never added in intermediate steps. A Monotonic Queue / Stack processes information from one side to the other eg. from left to right in the [Sliding Window Maximum problem.](https://leetcode.com/problems/min-stack/) Since the process is made from left to right (in each itertion, we look at the top of queue and decide our action, pop or not) we can only allow ourselves to modify the left side of the window since each element made its decision regarding the left neighbours of that element just like in the Sliding Window Maximum problem. For this problem we are trying to modify our right side of the window ie. top of the stack with pops, due to this logic the pops that we make from the top invalidates our monotonic stack.. [Read this sunset problem to see exactly why.](https://medium.com/@vishnuvardhan623/monotonic-stack-e9dcc4fa8c3e) The sunset problem has the exact same issue here.
+
+## Call Stack
+ **Call Stack:** A call stack is a stack data structure that stores information about the active subroutines of a computer program. This kind of stack is also known as an execution stack, program stack, control stack, run-time stack, or machine stack, and is often shortened to just "the stack". [E.g.](https://www.youtube.com/watch?v=Q2sFmqvpBe0)
 
 ## Encapsulation vs Abstraction 
 
@@ -417,6 +422,7 @@ but in singly linked list it would be O(N) since we would need to find the nodes
         3. Hoare-Partition is faster than Lomuto-Partition but Lomuto is easier to understand and implement.
      18. **In-place or not:** Yes it is. In-place means that the algorithm does not use extra space for manipulating the input but may require a small though nonconstant extra space for its operation. Usually, this space is O(log n), though sometimes anything in o(n) (Smaller than linear) is allowed.
      
+     
 * **Quick Select:** Use the idea of partitioning recursively to find the kth smallest element. This makes one recursive call instead of two as in Naive Quicksort. Average O(N) time complexity, worst O(N^2). Use a good pivot to avoid worst.
     1. T(n) = cn + T(n/2)
     2. c(n + n/2 + n/4 + ... + 2 + 1) = c(2n) = O(n) 
@@ -568,7 +574,7 @@ These resizing operations can be made seldom enough that the amortized cost of i
         2. Values which needed to be separated into different groups will not be mapped into the same group.
     3. This process is similar to design a hash function, but here is an essential difference. A hash function satisfies the first rule but might not satisfy the second one. But your mapping function should satisfy both of them.
     
-## Disjoint Sets      
+## Disjoint Sets - Union Find  
        
 * Disjoint sets are used for computing equivalence relations.
 Given a set S and a relation R, a R b, indicates that a is related to b with the relation R.
@@ -621,10 +627,15 @@ Given a set S and a relation R, a R b, indicates that a is related to b with the
         * Proof is same intuition with union by size.
     * ***Path COMPRESSION:***
         Path compression is a technique for dynamically changing the data structure during a find operation. When we perform find(x), the parent of every node from x to the root is changed to root. So subsequent find operations run faster (we are speculating though!)
+        * If only path compression is used then the time complexity become O((m+n) log(n)) where n is the number of elements and m is the operation number.
     * The basic idea (and hope) behind path compression is that we do some extra work during a find, and hope that this will speed up future find operations.
-    * **Union-by-Rank + Path compression** leads to find and union both as O(α(N)) where α(N) is ***The Inverse Ackermann Function.*** - Definition: A function of two parameters whose value grows very, very slowly. -
+    * The idea of Inverse Ackermann is that it is not f^-1(n) but it is a function that grows very slow just as how Ackermann grows super exponential O(N^N^N^N^N^N...)
     * α(N) <= 4 for all the practical purposes.
+* union by rank + path compression time complexity for m operations with n elements is O(m * alpha(n)) where alpha is inverse ackermann function
 * Space complexity is O(N)
+* Used in graphs, can find cycles, minimum spanning tree, node that are connected in a graph.
+* Path compression should change rank on the run since we modifying the input. This is where the inverse Ackermann comes to factor.
+[A discussion on Stack Overflow about why path compression doesnt change rank is here.](https://stackoverflow.com/questions/25317156/why-path-compression-doesnt-change-rank-in-unionfind)
 
 ## Binary Search 
 
@@ -840,7 +851,8 @@ In the end this will allow us to do djisktra without the need of a heap. Reducin
         1. Remove it
         1. Repeat
    4. Note that a topological sort is not (necessarily) unique. This stems from the fact that at any point, we may have more than one vertex with in-degree 0 and we have to choose one among them
-   5. While iterating on the algo, there is a cycle if there isnt any single vertex with in degree of 0. Ex. 0 -> 1, 1 -> 2, 2 -> 3, 3 -> 4, 4-> 0, 5-> 0. First 5 is taken out then we found out that there are no vertices with a in-degree of 0 therefore there is a cycle.
+   5. While iterating on the algo, there is a cycle if the total number of visited nodes is not the total number of nodes. Ex. 0 -> 1, 1 -> 2, 2 -> 3, 3 -> 4, 4-> 0, 5-> 0. 
+   First 5 is taken out then we found out that there are no vertices with a in-degree of 0 and num of visited nodes is 1 where as total nodes num is 6 therefore there is a cycle.
     
     
         void Graph::topsort( )
@@ -895,14 +907,14 @@ In the end this will allow us to do djisktra without the need of a heap. Reducin
             }
    1.Initialization is O(|V|)(O(|V|+|E|)if indegrees are computed)
     The while loop is executed at most  O(|V|) times but the for loop  body in the while loop is executed a total of O(|E|) times.
-
    2. Total time is O(|V|+|E|). 
-
-
+   3. Can be used in Directed Acyclic Graphs (DAC) to find the shortest path from one node to other.    
+   4. Can work with negative edge values unlike djikstra.
+   
 ### Detect Cycle in a undirected graph:
    1. **Union-Find:**
         1. Make V sets.
-        2. Look at the edges and merge the sets that are connect the vertices. 
+        2. Look at the edges and merge the corresponding vertices on the edges. 
         3. If looked vertices are already in a set then there is a cycle.
         4. **Time complexity: O(V * α(V)) by using both union-by-rank + path compression.**
         5. **Space complexity: O(V)**
@@ -958,15 +970,22 @@ In the end this will allow us to do djisktra without the need of a heap. Reducin
             22
             23     return dist, prev
 
-        a. findmin can be done by a deletemin: O(log|V|), decrease as decreasekey: O(log|V|) each - as many as |E|  of them
-        **Total: O(|V|log|V| + |E|log|V|) = O(|E|log|V|)** since O(|V|+|E|) is O(|E|) due to for N node to be connect there must be at least N-1 edges.
-        If fibonacci heap is used it has O(1) decreasekey so the algorithm can get as optimal as: **Total: O(|E| + |V|log|V|)**
-        2. One can avoid descrease key with using the visited node further to check when extracting from the heap. This would also require
+        a. findmin can be done by a deletemin: O(log|V|), decrease as decreasekey with a support of hashMap + minHeap: O(log|V|) each - as many as |E|  of them
+        **Total: O(|E|log|V| + |V|log|V|) = O((|E| + |V| * log|V|)** If fibonacci heap is used it has O(1) decreasekey so the algorithm can get as optimal as: **Total: O(|E| + |V|log|V|)**
+        
+        b. Fibonacci heap **Amortized Time Complexity List**
+        - Delete-min: O(log n)
+        - Find-min: Θ(1)
+        - Decrease-key: Θ(1)
+        - Insert: Θ(1)
+        - Merge: Θ(1)
+        
+        c. One can avoid descrease key with using the visited node further to check when extracting from the heap. This would also require
         adding all the edges to a heap that is found within a vertex. This would mean that the heap can get as big as O(|E|). 
-        The time complexity would grow up to be **O(|V| * log(|E|) + |E| * log(|E|))**
-    
-   * If we use Fibonacci Heaps then the complexity turns out to be O(|E|+|V|log| V|) where as if Binary Heap (Min Heap) is used its O((|E| + |V|) log |V|)
-
+        The time complexity would grow up to be **O(|E| * log|E|) === O(2 * |E| * log|E|)**
+   7. A visited stack can be avoided if no two nodes share the same ancestor, the graph must be a n-ary tree. One alternative point is that if one runs a dijkstra without a visited set in a DAG the algorithm would still work but it can grow in time complexity wise. 
+   e.g imagine a -> b cost 1, a -> d -> b a=>d cost 2 d=>b cost 3; in this graph b will be eventually processed two times. However, a dijkstra run in DAG seems much faster than run in a directed cyclic graph. 
+   
 ### Dijkstra vs. BFS 
    
    * Dijkstra's algorithm relies on the property that the shortest path from s to t is also the shortest path to any of the vertices along the path. This is exactly what BFS does.

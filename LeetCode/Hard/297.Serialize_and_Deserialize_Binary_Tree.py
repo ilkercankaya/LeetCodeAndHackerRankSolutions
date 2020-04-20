@@ -5,29 +5,36 @@
 #         self.left = None
 #         self.right = None
 
+import collections
 class Codec:
-
     def serialize(self, root):
-        if not root:
-            return ["X"]
+        res = collections.deque()
 
+        def _serialize(root):
+            if not root:
+                res.append(None)
+                return
 
-        left = self.serialize(root.left)
-        right = self.serialize(root.right)
+            res.append(root.val)
+            _serialize(root.left)
+            _serialize(root.right)
 
-        return [root.val] + left + right
+        _serialize(root)
+        return res
 
     def deserialize(self, data):
+        def _deserialize():
+            node = data.popleft()
 
-        node = data.pop(0)
+            if node is None:
+                return None
+            root = TreeNode(node)
+            root.left = _deserialize()
+            root.right = _deserialize()
 
-        if node == "X":
-            return None
-        root = TreeNode(node)
-        root.left = self.deserialize(data)
-        root.right = self.deserialize(data)
+            return root
 
-        return root
+        return _deserialize()
 
 # Your Codec object will be instantiated and called as such:
 # codec = Codec()

@@ -9,19 +9,26 @@ class Solution:
         # Parent representation of each element in union find
         parents = [- 1] * len(s)
 
-        def union(x, y):
-            parentX = find(x)
-            parentY = find(y)
-
-            if parentX != parentY:
-                parents[parentX] = parentY
-
         def find(x):
-            if parents[x] == -1:
+            if parents[x] < 0:
                 return x
-            else:
-                parents[x] = find(parents[x])
-                return parents[x]
+
+            parents[x] = find(parents[x])
+            return parents[x]
+
+        def union(x, y):
+            smallRoot, bigRoot = find(x), find(y)
+
+            if smallRoot == bigRoot:
+                return
+
+            if abs(parents[smallRoot]) > abs(parents[bigRoot]):
+                smallRoot, bigRoot = bigRoot, smallRoot
+
+            if abs(parents[bigRoot]) == abs(parents[smallRoot]):
+                parents[bigRoot] -= 1
+
+            parents[smallRoot] = bigRoot
 
         groupsOfPairs = collections.defaultdict(list)
 
@@ -44,7 +51,3 @@ class Solution:
             results.append(groupsOfPairs[find(i)].pop())
 
         return ''.join(results)
-
-
-
-
